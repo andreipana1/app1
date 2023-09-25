@@ -8,14 +8,6 @@ import prisma from "@/utils/connect";
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
-  session: {
-    strategy: "jwt",
-  },
-  pages: {
-    signIn: "/",
-  },
-  debug: process.env.NODE_ENV === "development",
-  secret: process.env.NEXTAUTH_SECRET,
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -55,4 +47,12 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+  session: {
+    strategy: "jwt",
+  },
+  pages: {
+    signIn: "/",
+  },
+  debug: process.env.NODE_ENV === "development",
+  secret: process.env.NEXTAUTH_SECRET,
 };
