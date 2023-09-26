@@ -1,7 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import ClientOnly from "@/components/ClientOnly";
 import { Props } from "@/types";
 import ToasterProvider from "@/providers/ToasterProvider";
 import Navbar from "@/components/navbar/Navbar";
@@ -20,10 +19,8 @@ export default async function RootLayout({ children }: Props) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ClientOnly>
-          <ToasterProvider />
-          <Navbar currentUser={currentUser} />
-        </ClientOnly>
+        <ToasterProvider />
+        <Navbar currentUser={currentUser} />
         <div className="pb-20 pt-28">{children}</div>
       </body>
     </html>
