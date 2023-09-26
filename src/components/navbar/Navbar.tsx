@@ -4,12 +4,13 @@ import Container from "@/components/Container";
 import Logo from "@/components/navbar/Logo";
 import Search from "@/components/navbar/Search";
 import UserMenu from "@/components/navbar/UserMenu";
+import Categories from "@/components/navbar/Categories";
 
 interface NavbarProps {
   currentUser?: SafeUser | null;
 }
 
-function Navbar({ currentUser }: NavbarProps) {
+export default function Navbar({ currentUser }: NavbarProps) {
   return (
     <nav className="fixed w-full bg-white z-10 shadow-sm">
       <div className="py-4 border-b-[1px]">
@@ -21,9 +22,7 @@ function Navbar({ currentUser }: NavbarProps) {
           </div>
         </Container>
       </div>
-      <span>categorie</span>
+      <Categories />
     </nav>
   );
 }
-
-export default Navbar;
