@@ -5,6 +5,7 @@ import { Props } from "@/types";
 import ToasterProvider from "@/providers/ToasterProvider";
 import Navbar from "@/components/navbar/Navbar";
 import getCurrentUser from "@/actions/getCurrentUser";
+import RentModal from "@/components/modals/RentModal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,6 +21,7 @@ export default async function RootLayout({ children }: Props) {
     <html lang="en">
       <body className={inter.className}>
         <ToasterProvider />
+        <RentModal />
         <Navbar currentUser={currentUser} />
         <div className="pb-20 pt-28">{children}</div>
       </body>

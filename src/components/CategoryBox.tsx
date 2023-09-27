@@ -7,6 +7,7 @@ interface CategoryBoxProps {
   icon: IconType;
   label: string;
   selected?: boolean;
+  onClick?: (value: string) => void;
 }
 
 export default function CategoryBox({
