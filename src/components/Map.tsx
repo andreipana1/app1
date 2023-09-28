@@ -1,6 +1,10 @@
 import React from "react";
 
-export default function Map() {
+interface MapProps {
+  center?: number[];
+}
+
+export default function Map({ center }: MapProps) {
   return (
     <div>
       <p>Map</p>
