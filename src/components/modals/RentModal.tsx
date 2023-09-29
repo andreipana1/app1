@@ -9,7 +9,6 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import { categories } from "@/constants";
 import Heading from "@/components/Heading";
-import CategoryBox from "@/components/CategoryBox";
 import CountrySelect from "@/components/inputs/CountrySelect";
 import Map from "@/components/Map";
 import CategoryInput from "@/components/inputs/CategoryInput";
