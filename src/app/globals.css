@@ -21,3 +21,15 @@ html, body, :root {
   font-size: 16px!important;
   width: 100% !important;
 }
+
+.counter {
+  @apply flex flex-row items-center justify-between;
+}
+
+.control__header {
+  @apply flex flex-col;
+}
+
+.control-counter {
+  @apply w-10 h-10 rounded-full border-[1px] border-neutral-400 flex items-center justify-center text-neutral-600 cursor-pointer hover:opacity-80 transition;
+}
