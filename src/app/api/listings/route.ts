@@ -6,9 +6,7 @@ import getCurrentUser from "@/actions/getCurrentUser";
 export async function POST(req: Request) {
   const currentUser = await getCurrentUser();
 
-  if (!currentUser) {
-    return res.error();
-  }
+  if (!currentUser) return res.error();
 
   const body = await req.json();
 
@@ -25,9 +23,7 @@ export async function POST(req: Request) {
   } = body;
 
   Object.keys(body).forEach((value) => {
-    if (!body[value]) {
-      res.error();
-    }
+    if (!body[value]) res.error();
   });
 
   const listing = await prisma.listing.create({

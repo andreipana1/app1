@@ -5,9 +5,7 @@ import prisma from "@/utils/connect";
 export async function POST(req: Request) {
   const currentUser = await getCurrentUser();
 
-  if (!currentUser) {
-    return res.error();
-  }
+  if (!currentUser) return res.error();
 
   const body = await req.json();
   const { listingId, startDate, endDate, totalPrice } = body;

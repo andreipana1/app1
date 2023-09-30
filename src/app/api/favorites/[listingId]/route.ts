@@ -12,9 +12,7 @@ interface IParams {
 export async function POST(req: Request, { params }: IParams) {
   const currentUser = await getCurrentUser();
 
-  if (!currentUser) {
-    return res.error();
-  }
+  if (!currentUser) return res.error();
 
   const { listingId } = params;
 
