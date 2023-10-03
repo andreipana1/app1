@@ -1,4 +1,7 @@
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
 import "./globals.css";
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Props } from "@/types";
