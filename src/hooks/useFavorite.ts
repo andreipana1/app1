@@ -1,9 +1,10 @@
-import { SafeUser } from "@/types";
-import { useRouter } from "next/navigation";
-import { useCallback, useMemo, MouseEvent } from "react";
-import useLoginModal from "@/hooks/useLoginModal";
 import axios from "axios";
+import { useRouter } from "next/navigation";
+import { MouseEvent, useCallback, useMemo } from "react";
 import { toast } from "react-hot-toast";
+
+import useLoginModal from "@/hooks/useLoginModal";
+import { SafeUser } from "@/types";
 
 interface IUseFavorite {
   listingId: string;

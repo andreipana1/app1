@@ -1,7 +1,7 @@
-import getListings, { IListingsParams } from "@/actions/getListings";
 import getCurrentUser from "@/actions/getCurrentUser";
-import EmptyState from "@/components/EmptyState";
+import getListings, { IListingsParams } from "@/actions/getListings";
 import Container from "@/components/Container";
+import EmptyState from "@/components/EmptyState";
 import ListingCard from "@/components/listings/ListingCard";
 
 interface HomeProps {
@@ -18,7 +18,7 @@ export default async function Home({ searchParams }: HomeProps) {
 
   return (
     <Container>
-      <div className="gridContainer">
+      <section className="gridContainer">
         {listings.map((listing) => (
           <ListingCard
             currentUser={currentUser}
@@ -26,7 +26,7 @@ export default async function Home({ searchParams }: HomeProps) {
             data={listing}
           />
         ))}
-      </div>
+      </section>
     </Container>
   );
 }

@@ -1,5 +1,6 @@
-import getCurrentUser from "@/actions/getCurrentUser";
 import { NextResponse as res } from "next/server";
+
+import getCurrentUser from "@/actions/getCurrentUser";
 import prisma from "@/utils/connect";
 
 export async function POST(req: Request) {

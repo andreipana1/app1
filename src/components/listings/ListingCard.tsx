@@ -1,13 +1,15 @@
 "use client";
 
-import { useCallback, useMemo, MouseEvent } from "react";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
-import HeartButton from "@/components/HeartButton";
-import { SafeListing, SafeReservation, SafeUser } from "@/types";
-import useCountries from "@/hooks/useCountries";
 import { format } from "date-fns";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { MouseEvent, useCallback, useMemo } from "react";
+
 import Button from "@/components/Button";
+import HeartButton from "@/components/HeartButton";
+import useCountries from "@/hooks/useCountries";
+import { SafeListing, SafeReservation, SafeUser } from "@/types";
+import { formatToMoney } from "@/utils/helpers";
 
 interface ListingCardProps {
   data: SafeListing;
@@ -56,12 +58,12 @@ export default function ListingCard({
   }, [reservation]);
 
   return (
-    <section
+    <article
       className="col-span-1 cursor-pointer group"
       onClick={() => router.push(`/listings/${data.id}`)}
     >
       <div className="flex flex-col gap-2 w-full">
-        <div className="aspect-square w-full relative overflow-hidden rounded-xl">
+        <figure className="aspect-square w-full relative overflow-hidden rounded-xl">
           <Image
             src={data.imageSrc}
             alt="Listing"
@@ -73,20 +75,20 @@ export default function ListingCard({
           <div className="absolute top-3 right-3">
             <HeartButton listingId={data.id} currentUser={currentUser} />
           </div>
-        </div>
+        </figure>
 
-        <div className="font-semibold text-lg">
+        <h1 className="font-semibold text-lg">
           {location?.region}, {location?.label}
-        </div>
+        </h1>
 
-        <div className="font-light text-neutral-500">
+        <p className="font-light text-neutral-500">
           {reservationDate || data.category}
-        </div>
+        </p>
 
-        <div className="flex flex-row items-center gap-1">
-          <div className="font-semibold">${price}</div>
-          {!reservation && <div className="font-light">Night</div>}
-        </div>
+        <footer className="flex flex-row items-center gap-1">
+          <h3 className="font-semibold">{formatToMoney(price)}</h3>
+          {!reservation && <p className="font-light">Night</p>}
+        </footer>
 
         {onAction && actionLabel && (
           <Button
@@ -97,6 +99,6 @@ export default function ListingCard({
           />
         )}
       </div>
-    </section>
+    </article>
   );
 }

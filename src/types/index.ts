@@ -1,5 +1,5 @@
-import { Session, User } from "next-auth";
 import { Listing, Reservation } from "@prisma/client";
+import { Session, User } from "next-auth";
 import { ReactNode } from "react";
 
 export interface Props {

@@ -1,5 +1,6 @@
-import getCurrentUser from "@/actions/getCurrentUser";
 import { NextResponse as res } from "next/dist/server/web/spec-extension/response";
+
+import getCurrentUser from "@/actions/getCurrentUser";
 import prisma from "@/utils/connect";
 
 interface IParams {

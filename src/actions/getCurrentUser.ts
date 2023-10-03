@@ -1,8 +1,8 @@
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/utils/auth";
 
-import prisma from "@/utils/connect";
 import { SessionInterface } from "@/types";
+import { authOptions } from "@/utils/auth";
+import prisma from "@/utils/connect";
 
 export async function getSession() {
   return (await getServerSession(authOptions)) as SessionInterface;

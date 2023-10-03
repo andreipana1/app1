@@ -4,12 +4,13 @@ import "./globals.css";
 
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { Props } from "@/types";
-import ToasterProvider from "@/providers/ToasterProvider";
-import Navbar from "@/components/navbar/Navbar";
+
 import getCurrentUser from "@/actions/getCurrentUser";
 import RentModal from "@/components/modals/RentModal";
+import Navbar from "@/components/navbar/Navbar";
 import AuthProvider from "@/providers/AuthProvider";
+import ToasterProvider from "@/providers/ToasterProvider";
+import { Props } from "@/types";
 
 const inter = Inter({ subsets: ["latin"] });
 

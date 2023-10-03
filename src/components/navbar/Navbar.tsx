@@ -1,10 +1,11 @@
 import React from "react";
-import { SafeUser } from "@/types";
+
 import Container from "@/components/Container";
+import Categories from "@/components/navbar/Categories";
 import Logo from "@/components/navbar/Logo";
 import Search from "@/components/navbar/Search";
 import UserMenu from "@/components/navbar/UserMenu";
-import Categories from "@/components/navbar/Categories";
+import { SafeUser } from "@/types";
 
 interface NavbarProps {
   currentUser?: SafeUser | null;
