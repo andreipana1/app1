@@ -1,18 +1,10 @@
-import React from "react";
+import cx from "classnames";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
 import useFavorite from "@/hooks/useFavorite";
-import { SafeUser } from "@/types";
+import { HeartButtonProps as Props } from "@/types";
 
-interface HeartButtonProps {
-  listingId: string;
-  currentUser?: SafeUser | null;
-}
-
-export default function HeartButton({
-  listingId,
-  currentUser,
-}: HeartButtonProps) {
+export default function HeartButton({ listingId, currentUser }: Props) {
   const { toggleFavorite, hasFavorite } = useFavorite({
     listingId,
     currentUser,
@@ -26,7 +18,7 @@ export default function HeartButton({
       <AiOutlineHeart size={28} className="fill-white absolute" />
       <AiFillHeart
         size={28}
-        className={hasFavorite ? "fill-rose-500" : "fill-neutral-500/70"}
+        className={cx(hasFavorite ? "fill-rose-500" : "fill-neutral-500/70")}
       />
     </div>
   );

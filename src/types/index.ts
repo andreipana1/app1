@@ -1,6 +1,8 @@
 import { Listing, Reservation } from "@prisma/client";
 import { Session, User } from "next-auth";
 import { ReactNode } from "react";
+import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
+import { IconType } from "react-icons";
 
 export interface Props {
   children: ReactNode;
@@ -38,3 +40,39 @@ export type SafeReservation = Omit<
   endDate: string;
   listing: SafeListing;
 };
+
+export interface InputProps {
+  id: string;
+  label: string;
+  type?: string;
+  disabled?: boolean;
+  formatPrice?: boolean;
+  required?: boolean;
+  register: UseFormRegister<FieldValues>;
+  errors: FieldErrors;
+}
+
+export interface CategoryBoxProps {
+  icon: IconType;
+  label: string;
+  selected?: boolean;
+  onClick: (value: string) => void;
+}
+
+export interface CounterProps {
+  title: string;
+  subtitle: string;
+  value: number;
+  onChange: (value: number) => void;
+}
+
+export interface HeartButtonProps {
+  listingId: string;
+  currentUser?: SafeUser | null;
+}
+
+export interface HeadingProps {
+  title: string;
+  subtitle?: string;
+  center?: boolean;
+}
