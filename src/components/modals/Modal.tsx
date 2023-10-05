@@ -4,19 +4,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 
 import Button from "@/components/Button";
-
-interface ModalProps {
-  isOpen?: boolean;
-  onClose: () => void;
-  onSubmit: () => void;
-  title?: string;
-  body?: React.ReactElement;
-  footer?: React.ReactElement;
-  actionLabel: string;
-  disabled?: boolean;
-  secondaryAction?: () => void;
-  secondaryActionLabel?: string;
-}
+import { ModalProps as Props } from "@/types";
 
 function Modal({
   actionLabel,
@@ -29,7 +17,7 @@ function Modal({
   title,
   isOpen,
   body,
-}: ModalProps) {
+}: Props) {
   const [showModal, setShowModal] = useState(isOpen);
 
   useEffect(() => {
