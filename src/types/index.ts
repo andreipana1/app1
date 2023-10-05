@@ -76,3 +76,17 @@ export interface HeadingProps {
   subtitle?: string;
   center?: boolean;
 }
+
+export interface CategoryViewProps {
+  icon: IconType;
+  label: string;
+  description: string;
+}
+
+export interface ListingHeadProps {
+  title: string;
+  locationValue: string;
+  imageSrc: string;
+  id: string;
+  currentUser?: SafeUser | null;
+}
