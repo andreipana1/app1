@@ -20,6 +20,7 @@ export default function CountrySelect({ onChange, value }: CountrySelectProps) {
 
   return (
     <Select
+      className="z-[9999]"
       placeholder="Anywhere"
       isClearable
       options={getAll()}
