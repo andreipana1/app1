@@ -1,5 +1,6 @@
 "use client";
 
+import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { ChangeEvent, useCallback, useMemo, useState } from "react";
@@ -81,6 +82,34 @@ export default function RentModal() {
   const onNext = () => setStep((prevState) => prevState + 1);
   const onBack = () => setStep((prevState) => prevState - 1);
 
+  const { mutate } = useMutation({
+    mutationFn: async (newProduct: FieldValues) => {
+      if (step !== STEPS.PRICE) return onNext();
+
+      const imageUrl = await uploadImage(imageSrc);
+
+      if (imageUrl.url) {
+        const { data } = await axios.post("/api/listings", {
+          ...newProduct,
+          img: imageUrl.url,
+        });
+
+        return data;
+      }
+    },
+    onSuccess: () => {
+      toast.success("Listing created!");
+      router.refresh();
+      reset();
+      setStep(STEPS.CATEGORY);
+      rentModal.onClose();
+    },
+    onError: () => {
+      toast.error("Error creating Product");
+    },
+  });
+
+  /**
   function onSubmit(data: FieldValues) {
     if (step !== STEPS.PRICE) return onNext();
     setLoading(true);
@@ -100,6 +129,7 @@ export default function RentModal() {
         setLoading(false);
       });
   }
+      **/
 
   const actionLabel = useMemo(() => {
     if (step === STEPS.PRICE) return "Create";
@@ -161,13 +191,15 @@ export default function RentModal() {
     step,
   ]);
 
+  // @ts-ignore
   return (
     <Modal
       disabled={loading}
       isOpen={rentModal.isOpen}
       title="Airbnb your home!"
       actionLabel={actionLabel}
-      onSubmit={handleSubmit(onSubmit)}
+      // @ts-ignore
+      onSubmit={handleSubmit(mutate)}
       secondaryActionLabel={secondaryActionLabel}
       secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
       onClose={rentModal.onClose}
