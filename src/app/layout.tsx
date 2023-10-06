@@ -12,6 +12,7 @@ import RentModal from "@/components/modals/RentModal";
 import SearchModal from "@/components/modals/SearchModal";
 import Navbar from "@/components/navbar/Navbar";
 import AuthProvider from "@/providers/AuthProvider";
+import QueryProvider from "@/providers/QueryProvider";
 import ToasterProvider from "@/providers/ToasterProvider";
 import { Props } from "@/types";
 
@@ -29,13 +30,15 @@ export default async function RootLayout({ children }: Props) {
     <html lang="en">
       <body className={inter.className}>
         <AuthProvider>
-          <ToasterProvider />
-          <LoginModal />
-          <RegisterModal />
-          <SearchModal />
-          <RentModal />
-          <Navbar currentUser={currentUser} />
-          <div className="pb-20 pt-28">{children}</div>
+          <QueryProvider>
+            <ToasterProvider />
+            <LoginModal />
+            <RegisterModal />
+            <SearchModal />
+            <RentModal />
+            <Navbar currentUser={currentUser} />
+            <div className="pb-20 pt-28">{children}</div>
+          </QueryProvider>
         </AuthProvider>
       </body>
     </html>

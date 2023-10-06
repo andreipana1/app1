@@ -6,7 +6,7 @@ import { IoMdClose } from "react-icons/io";
 import Button from "@/components/Button";
 import { ModalProps as Props } from "@/types";
 
-function Modal({
+export default function Modal({
   actionLabel,
   secondaryActionLabel,
   secondaryAction,
@@ -86,5 +86,3 @@ function Modal({
     </div>
   );
 }
-
-export default Modal;

@@ -16,12 +16,12 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: "credentials",
       credentials: {
-        email: { label: "email", type: "text" },
-        password: { label: "password", type: "password" },
+        email: { label: "Username", type: "text" },
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          throw new Error("Invalid credentials");
+          return null;
         }
 
         const user = await prisma.user.findUnique({
@@ -31,19 +31,17 @@ export const authOptions: NextAuthOptions = {
         });
 
         if (!user || !user?.hashedPassword) {
-          throw new Error("Invalid credentials");
+          return null;
         }
 
-        const isCorrectPassword = await bcrypt.compare(
-          credentials?.password,
-          user.hashedPassword,
+        const passwordsMatch = await bcrypt.compare(
+          credentials.password,
+          user?.hashedPassword,
         );
 
-        if (!isCorrectPassword) {
-          throw new Error("Invalid credentials");
-        }
+        if (user && passwordsMatch) return user;
 
-        return user;
+        return null;
       },
     }),
   ],

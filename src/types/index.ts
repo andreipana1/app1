@@ -1,6 +1,7 @@
 import { Listing, Reservation } from "@prisma/client";
 import { Session, User } from "next-auth";
 import React, { ReactNode } from "react";
+import { Range } from "react-date-range";
 import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 import { IconType } from "react-icons";
 
@@ -114,4 +115,27 @@ export interface ListingInfoProps {
       }
     | undefined;
   locationValue: string;
+}
+
+export interface ListingReservationProps {
+  price: number;
+  dateRange: Range;
+  totalPrice: number;
+  onChangeDate: (value: Range) => void;
+  onSubmit: () => void;
+  disabled?: boolean;
+  disabledDates: Date[];
+}
+
+export interface ModalProps {
+  isOpen?: boolean;
+  onClose: () => void;
+  onSubmit: () => void;
+  title?: string;
+  body?: React.ReactElement;
+  footer?: React.ReactElement;
+  actionLabel: string;
+  disabled?: boolean;
+  secondaryAction?: () => void;
+  secondaryActionLabel?: string;
 }
