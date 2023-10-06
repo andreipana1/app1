@@ -90,3 +90,28 @@ export interface ListingHeadProps {
   id: string;
   currentUser?: SafeUser | null;
 }
+
+export interface ButtonProps {
+  label: string;
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  disabled?: boolean;
+  outline?: boolean;
+  small?: boolean;
+  icon?: IconType;
+}
+
+export interface ListingInfoProps {
+  user: SafeUser;
+  description: string;
+  guestCount: number;
+  roomCount: number;
+  bathroomCount: number;
+  category:
+    | {
+        icon: IconType;
+        label: string;
+        description: string;
+      }
+    | undefined;
+  locationValue: string;
+}
