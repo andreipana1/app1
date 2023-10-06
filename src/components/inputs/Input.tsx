@@ -1,7 +1,7 @@
 "use client";
 
-import cx from "classnames";
 import { BiDollar } from "react-icons/bi";
+import { twJoin } from "tailwind-merge";
 
 import { InputProps } from "@/types";
 
@@ -20,7 +20,7 @@ export default function Input({ id, register, required, ...rest }: InputProps) {
         id={id}
         disabled={rest.disabled}
         type={rest.type}
-        className={cx(
+        className={twJoin(
           `peer w-full p-4 pt-6 font-light bg-white border-2 rounded-md outline-none transition disabled:opacity-70 disabled:cursor-not-allowed`,
           rest.formatPrice ? "pl-9" : "pl-4",
           rest.errors[id]
@@ -30,7 +30,7 @@ export default function Input({ id, register, required, ...rest }: InputProps) {
       />
       <label
         htmlFor={id}
-        className={cx(
+        className={twJoin(
           `absolute text-base duration-150 transform -translate-y-3 top-5 z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4`,
           rest.formatPrice ? "left-9" : "left-4",
           rest.errors[id] ? "text-rose-500" : "text-zinc-400",

@@ -1,4 +1,3 @@
-import cx from "classnames";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
 import useFavorite from "@/hooks/useFavorite";
@@ -18,7 +17,7 @@ export default function HeartButton({ listingId, currentUser }: Props) {
       <AiOutlineHeart size={28} className="fill-white absolute" />
       <AiFillHeart
         size={28}
-        className={cx(hasFavorite ? "fill-rose-500" : "fill-neutral-500/70")}
+        className={hasFavorite ? "fill-rose-500" : "fill-neutral-500/70"}
       />
     </div>
   );
