@@ -182,7 +182,7 @@ export default function RentModal() {
         <Input
           id="title"
           label="Title"
-          disabled={isLoading}
+          disabled={loading}
           register={register}
           errors={errors}
           required
@@ -191,7 +191,7 @@ export default function RentModal() {
         <Input
           id="description"
           label="Description"
-          disabled={isLoading}
+          disabled={loading}
           register={register}
           errors={errors}
           required
@@ -212,7 +212,7 @@ export default function RentModal() {
           label="Price"
           formatPrice
           type="number"
-          disabled={isLoading}
+          disabled={loading}
           register={register}
           errors={errors}
           required
