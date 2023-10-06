@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import React, { useCallback, useMemo, useState } from "react";
+import React, { ChangeEvent, useCallback, useMemo, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
@@ -23,6 +23,15 @@ enum STEPS {
   DESCRIPTION = 4,
   PRICE = 5,
 }
+
+const uploadImage = async (imagePath: string) => {
+  try {
+    const { data } = await axios.post(`/upload`, { path: imagePath });
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
 
 export default function RentModal() {
   const [step, setStep] = useState(STEPS.CATEGORY);
