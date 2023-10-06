@@ -8,18 +8,8 @@ import { MouseEvent, useCallback, useMemo } from "react";
 import Button from "@/components/Button";
 import HeartButton from "@/components/HeartButton";
 import useCountries from "@/hooks/useCountries";
-import { SafeListing, SafeReservation, SafeUser } from "@/types";
+import { ListingCardProps as Props } from "@/types";
 import { formatToMoney } from "@/utils/helpers";
-
-interface ListingCardProps {
-  data: SafeListing;
-  reservation?: SafeReservation;
-  onAction?: (id: string) => void;
-  disabled?: boolean;
-  actionLabel?: string;
-  actionId?: string;
-  currentUser?: SafeUser | null;
-}
 
 export default function ListingCard({
   currentUser,
@@ -29,7 +19,7 @@ export default function ListingCard({
   reservation,
   data,
   disabled,
-}: ListingCardProps) {
+}: Props) {
   const router = useRouter();
   const { getByValue } = useCountries();
 

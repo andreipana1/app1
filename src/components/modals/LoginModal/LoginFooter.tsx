@@ -1,3 +1,5 @@
+"use client";
+
 import { signIn } from "next-auth/react";
 import { useCallback } from "react";
 import { AiFillGithub } from "react-icons/ai";

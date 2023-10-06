@@ -1,4 +1,3 @@
-import React from "react";
 import { twJoin } from "tailwind-merge";
 
 import { ButtonProps as Props } from "@/types";

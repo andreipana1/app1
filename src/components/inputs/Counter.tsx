@@ -10,7 +10,7 @@ export default function Counter({ onChange, value, subtitle, title }: Props) {
 
   const onReduce = useCallback(() => {
     if (value === 1) return;
-    onChange(value + 1);
+    onChange(value - 1);
   }, [onChange, value]);
 
   return (

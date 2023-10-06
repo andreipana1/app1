@@ -139,3 +139,13 @@ export interface ModalProps {
   secondaryAction?: () => void;
   secondaryActionLabel?: string;
 }
+
+export interface ListingCardProps {
+  data: SafeListing;
+  reservation?: SafeReservation;
+  onAction?: (id: string) => void;
+  disabled?: boolean;
+  actionLabel?: string;
+  actionId?: string;
+  currentUser?: SafeUser | null;
+}
