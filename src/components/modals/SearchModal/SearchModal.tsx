@@ -1,3 +1,5 @@
+"use client";
+
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 
@@ -18,7 +20,7 @@ export default function SearchModal() {
 
   return (
     <div>
-      <div>SearchModal</div>
+      <div></div>
     </div>
   );
 }
