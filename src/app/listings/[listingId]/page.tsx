@@ -16,5 +16,11 @@ export default async function ListingsPage({ params }: Props) {
 
   if (!listing) return <EmptyState />;
 
-  return <div>ListingClient</div>;
+  return (
+    <ListingClient
+      listing={listing}
+      reservations={reservations}
+      currentUser={currentUser}
+    />
+  );
 }

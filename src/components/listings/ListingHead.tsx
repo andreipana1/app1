@@ -20,6 +20,7 @@ export default function ListingHead({ id, ...rest }: Props) {
         <Image
           src={rest.imageSrc}
           alt="Image"
+          fill
           className="object-cover w-full"
         />
         <div className="absolute top-5 right-5">

@@ -114,7 +114,8 @@ export interface ListingInfoProps {
         label: string;
         description: string;
       }
-    | undefined;
+    | undefined
+    | any;
   locationValue: string;
 }
 
