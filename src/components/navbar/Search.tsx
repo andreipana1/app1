@@ -6,8 +6,10 @@ import { useMemo } from "react";
 import { BiSearch } from "react-icons/bi";
 
 import useCountries from "@/hooks/useCountries";
+import useSearchModal from "@/hooks/useSearchModal";
 
 export default function Search() {
+  const searchModal = useSearchModal();
   const searchParams = useSearchParams();
 
   const { getByValue } = useCountries();
@@ -40,7 +42,10 @@ export default function Search() {
   }, [guestCount]);
 
   return (
-    <div className="border-[1px] w-full md:w-max mx-auto py-2 rounded-full shadow-sm hover:shadow-md transition cursor-pointer">
+    <div
+      onClick={searchModal.onOpen}
+      className="border-[1px] w-full md:w-max mx-auto py-2 rounded-full shadow-sm hover:shadow-md transition cursor-pointer"
+    >
       <div className="flex flex-row items-center justify-between">
         <div className="text-sm font-semibold px-6">{locationLabel}</div>
         <div className="hidden sm:block text-sm font-semibold px-6 border-x-[1px] flex-1 text-center">
