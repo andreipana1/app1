@@ -3,7 +3,6 @@ import { ChangeEvent } from "react";
 import { TbPhotoPlus } from "react-icons/tb";
 
 import Heading from "@/components/Heading";
-import ImageUpload from "@/components/inputs/ImageUpload";
 
 type Props = {
   imageSrc: string;

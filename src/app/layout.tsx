@@ -4,6 +4,7 @@ import "./globals.css";
 
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 
 import getCurrentUser from "@/actions/getCurrentUser";
 import LoginModal from "@/components/modals/LoginModal";
@@ -13,7 +14,6 @@ import SearchModal from "@/components/modals/SearchModal";
 import Navbar from "@/components/navbar/Navbar";
 import AuthProvider from "@/providers/AuthProvider";
 import QueryProvider from "@/providers/QueryProvider";
-import ToasterProvider from "@/providers/ToasterProvider";
 import { Props } from "@/types";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -31,7 +31,7 @@ export default async function RootLayout({ children }: Props) {
       <body className={inter.className}>
         <AuthProvider>
           <QueryProvider>
-            <ToasterProvider />
+            <Toaster />
             <LoginModal />
             <RegisterModal />
             <SearchModal />

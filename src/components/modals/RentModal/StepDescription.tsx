@@ -1,5 +1,5 @@
 import React from "react";
-import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
+import { FieldErrors, FieldValues } from "react-hook-form";
 
 import Heading from "@/components/Heading";
 import Input from "@/components/inputs/Input";
