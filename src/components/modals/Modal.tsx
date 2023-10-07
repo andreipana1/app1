@@ -69,6 +69,7 @@ export default function Modal({
                     label={secondaryActionLabel}
                     onClick={handleSecondaryAction}
                     disabled={disabled}
+                    type="button"
                     outline
                   />
                 )}
@@ -76,6 +77,7 @@ export default function Modal({
                   label={actionLabel}
                   onClick={handleSubmit}
                   disabled={disabled}
+                  type="button"
                 />
               </div>
               {footer}

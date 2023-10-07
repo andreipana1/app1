@@ -16,7 +16,7 @@ export default function Navbar({ currentUser }: NavbarProps) {
     <nav className="fixed w-full bg-white z-10 shadow-sm">
       <header className="py-4 border-b-[1px]">
         <Container>
-          <div className="flex flex-row items-center justify-between gap-3 md:gap-0">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-0 items-center">
             <Logo />
             <Search />
             <UserMenu currentUser={currentUser} />

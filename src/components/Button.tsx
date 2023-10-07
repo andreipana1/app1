@@ -5,6 +5,7 @@ import { ButtonProps as Props } from "@/types";
 export default function Button({ icon: Icon, ...rest }: Props) {
   return (
     <button
+      type={rest.type}
       disabled={rest.disabled}
       onClick={rest.onClick}
       className={twJoin(

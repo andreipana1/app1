@@ -3,7 +3,7 @@
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import React, { ChangeEvent, useCallback, useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
@@ -27,7 +27,7 @@ enum STEPS {
 
 const uploadImage = async (imagePath: string) => {
   try {
-    const { data } = await axios.post(`/upload`, { path: imagePath });
+    const { data } = await axios.post(`/api/upload`, { path: imagePath });
     return data;
   } catch (error) {
     throw error;
@@ -36,7 +36,6 @@ const uploadImage = async (imagePath: string) => {
 
 export default function RentModal() {
   const [step, setStep] = useState(STEPS.CATEGORY);
-  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
   const rentModal = useRentModal();
@@ -82,19 +81,21 @@ export default function RentModal() {
   const onNext = () => setStep((prevState) => prevState + 1);
   const onBack = () => setStep((prevState) => prevState - 1);
 
-  const { mutate } = useMutation({
+  const { mutate, isLoading: loading } = useMutation({
     mutationFn: async (newProduct: FieldValues) => {
-      if (step !== STEPS.PRICE) return onNext();
+      try {
+        const imageUrl = await uploadImage(imageSrc);
 
-      const imageUrl = await uploadImage(imageSrc);
+        if (imageUrl.url) {
+          const { data } = await axios.post("/api/listings", {
+            ...newProduct,
+            imageSrc: imageUrl.url,
+          });
 
-      if (imageUrl.url) {
-        const { data } = await axios.post("/api/listings", {
-          ...newProduct,
-          img: imageUrl.url,
-        });
-
-        return data;
+          return data;
+        }
+      } catch (error) {
+        throw new Error("Error");
       }
     },
     onSuccess: () => {
@@ -109,27 +110,13 @@ export default function RentModal() {
     },
   });
 
-  /**
-  function onSubmit(data: FieldValues) {
-    if (step !== STEPS.PRICE) return onNext();
-    setLoading(true);
-    axios
-      .post("/api/listings", data)
-      .then(() => {
-        toast.success("Listing created!");
-        router.refresh();
-        reset();
-        setStep(STEPS.CATEGORY);
-        rentModal.onClose();
-      })
-      .catch(() => {
-        toast.error("Something went wrong.");
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }
-      **/
+  const handleNewItem = useCallback(
+    (data: FieldValues) => {
+      if (step !== STEPS.PRICE) return onNext();
+      mutate(data);
+    },
+    [mutate, step],
+  );
 
   const actionLabel = useMemo(() => {
     if (step === STEPS.PRICE) return "Create";
@@ -191,15 +178,13 @@ export default function RentModal() {
     step,
   ]);
 
-  // @ts-ignore
   return (
     <Modal
       disabled={loading}
       isOpen={rentModal.isOpen}
       title="Airbnb your home!"
       actionLabel={actionLabel}
-      // @ts-ignore
-      onSubmit={handleSubmit(mutate)}
+      onSubmit={handleSubmit(handleNewItem)}
       secondaryActionLabel={secondaryActionLabel}
       secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
       onClose={rentModal.onClose}

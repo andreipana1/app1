@@ -99,6 +99,7 @@ export interface ButtonProps {
   outline?: boolean;
   small?: boolean;
   icon?: IconType;
+  type?: "button" | "submit" | "reset" | undefined;
 }
 
 export interface ListingInfoProps {
