@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import React, { useMemo } from "react";
+import React from "react";
 
 import Heading from "@/components/Heading";
 import CountrySelect, {
@@ -11,15 +11,12 @@ interface Props {
   setLocation: (value: CountrySelectValue) => void;
 }
 
-export default function BodyContent({ setLocation, location }: Props) {
-  const Map = useMemo(
-    () =>
-      dynamic(() => import("../../Map"), {
-        ssr: false,
-      }),
-    [],
-  );
+const Map = dynamic(() => import("../../Map"), {
+  loading: () => <p>loading...</p>,
+  ssr: false,
+});
 
+export default function BodyContent({ setLocation, location }: Props) {
   return (
     <div className="flex flex-col gap-8">
       <Heading

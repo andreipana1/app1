@@ -104,9 +104,9 @@ export default function ListingClient({
         <div className="flex flex-col gap-6">
           <ListingHead {...listing} currentUser={currentUser} />
 
-          <div className="grid grid-cols-1 md:grid-cols-7 md:gap-10 mt-6">
+          <section className="grid grid-cols-1 md:grid-cols-7 md:gap-10 mt-6">
             <ListingInfo {...listing} category={category} />
-            <div className="order-first mb-10 md:order-last md:col-span-3">
+            <aside className="order-first md:order-last md:col-span-3">
               <ListingReservation
                 price={listing.price}
                 totalPrice={totalPrice}
@@ -117,8 +117,8 @@ export default function ListingClient({
                 // @ts-ignore
                 disabledDates={disableDates}
               />
-            </div>
-          </div>
+            </aside>
+          </section>
         </div>
       </div>
     </Container>

@@ -16,7 +16,7 @@ export default function ListingHead({ id, ...rest }: Props) {
         title={rest.title}
         subtitle={`${location?.region}, ${location?.label}`}
       />
-      <div className="w-full h-[60vh] overflow-hidden rounded-xl relative">
+      <figure className="w-full h-[60vh] overflow-hidden rounded-xl relative">
         <Image
           src={rest.imageSrc}
           alt="Image"
@@ -26,7 +26,7 @@ export default function ListingHead({ id, ...rest }: Props) {
         <div className="absolute top-5 right-5">
           <HeartButton listingId={id} currentUser={rest.currentUser} />
         </div>
-      </div>
+      </figure>
     </>
   );
 }

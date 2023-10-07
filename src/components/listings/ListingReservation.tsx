@@ -1,5 +1,3 @@
-import React from "react";
-
 import Button from "@/components/Button";
 import Calendar from "@/components/inputs/Calendar";
 import { ListingReservationProps as Props } from "@/types";
@@ -15,11 +13,11 @@ export default function ListingReservation({
   onSubmit,
 }: Props) {
   return (
-    <div className="bg-white rounded-xl border-[1px] border-neutral-200 overflow-hidden">
-      <div className="flex items-center gap-1 p-4">
-        <div className="text-2xl font-semibold">{formatToMoney(price)}</div>
-        <div className="font-light text-neutral-600">night</div>
-      </div>
+    <section className="bg-white rounded-xl border-[1px] border-neutral-200 overflow-hidden">
+      <header className="flex items-center gap-1 p-4">
+        <h2 className="text-2xl font-semibold">{formatToMoney(price)}</h2>
+        <p className="font-light text-neutral-600">night</p>
+      </header>
       <hr />
       <Calendar
         value={dateRange}
@@ -27,14 +25,16 @@ export default function ListingReservation({
         onChange={(value) => onChangeDate(value.selection)}
       />
       <hr />
-      <div className="p-4">
-        <Button label="Reserve" onClick={onSubmit} disabled={disabled} />
-      </div>
-      <hr />
-      <div className="p-4 flex flex-row items-center justify-between font-semibold text-lg">
-        <div>Total</div>
-        <div>{formatToMoney(totalPrice)}</div>
-      </div>
-    </div>
+      <footer>
+        <div className="p-4">
+          <Button label="Reserve" onClick={onSubmit} disabled={disabled} />
+        </div>
+        <hr />
+        <div className="p-4 flex flex-row items-center justify-between font-semibold text-lg">
+          <h2>Total</h2>
+          <p>{formatToMoney(totalPrice)}</p>
+        </div>
+      </footer>
+    </section>
   );
 }

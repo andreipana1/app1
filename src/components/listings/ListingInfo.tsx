@@ -8,6 +8,7 @@ import useCountries from "@/hooks/useCountries";
 import { ListingInfoProps as Props } from "@/types";
 
 const Map = dynamic(() => import("../Map"), {
+  loading: () => <p>loading...</p>,
   ssr: false,
 });
 
@@ -24,18 +25,18 @@ export default function ListingInfo({
   const coordinates = getByValue(locationValue)?.latlng;
 
   return (
-    <div className="col-span-4 flex flex-col gap-8">
-      <div className="flex flex-col gap-2">
+    <article className="col-span-4 flex flex-col gap-8">
+      <header className="flex flex-col gap-2">
         <div className="text-xl font-semibold flex items-center gap-2">
-          <div>Hosted by {user.name}</div>
+          <h2>Hosted by {user.name}</h2>
           <Avatar src={user.image} />
         </div>
-        <div className="flex items-center gap-4 font-light text-neutral-500">
-          <div>{guestCount} guests</div>
-          <div>{roomCount} rooms</div>
-          <div>{bathroomCount} bathrooms</div>
-        </div>
-      </div>
+        <ul className="flex items-center gap-4 font-light text-neutral-500">
+          <li>{guestCount} guests</li>
+          <li>{roomCount} rooms</li>
+          <li>{bathroomCount} bathrooms</li>
+        </ul>
+      </header>
       <hr />
       {category && (
         <ListingCategory
@@ -47,6 +48,6 @@ export default function ListingInfo({
       <div className="text-lg font-light text-neutral-500">{description}</div>
       <hr />
       <Map center={coordinates} />
-    </div>
+    </article>
   );
 }

@@ -20,10 +20,6 @@ interface MapProps {
   center?: number[];
 }
 
-const url = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
-const attribution =
-  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
-
 export default function Map({ center }: MapProps) {
   return (
     <MapContainer
@@ -32,7 +28,10 @@ export default function Map({ center }: MapProps) {
       scrollWheelZoom={false}
       className="h-[35vh] rounded-lg"
     >
-      <TileLayer url={url} attribution={attribution} />
+      <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
       {center && <Marker position={center as L.LatLngExpression} />}
     </MapContainer>
   );
