@@ -45,7 +45,8 @@ export default function StepImages({ setCustomValue, imageSrc }: Props) {
 
         <input
           type="file"
-          id="image"
+          id="poster"
+          name="poster"
           accept="image/*"
           required={!imageSrc}
           className="absolute z-30 w-full opacity-0 h-full cursor-pointer"
@@ -59,6 +60,7 @@ export default function StepImages({ setCustomValue, imageSrc }: Props) {
               alt="House"
               className="object-cover z-20"
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </div>
         )}

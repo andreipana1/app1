@@ -58,7 +58,7 @@ export default function Modal({
             <div className="flex items-center p-6 rounded-t justify-center relative border-b-[1px]">
               <button
                 onClick={handleClose}
-                className="p-1 border-0 hover:opacity-70 transition absolute left-9"
+                className="p-1 border-0 hover:opacity-70 transition absolute left-5"
               >
                 <IoMdClose size={28} />
               </button>

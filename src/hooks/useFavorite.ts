@@ -1,3 +1,4 @@
+import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { MouseEvent, useCallback, useMemo } from "react";
@@ -13,7 +14,6 @@ interface IUseFavorite {
 
 export default function useFavorite({ currentUser, listingId }: IUseFavorite) {
   const router = useRouter();
-
   let loginModal = useLoginModal();
 
   const hasFavorite = useMemo(() => {
@@ -21,28 +21,33 @@ export default function useFavorite({ currentUser, listingId }: IUseFavorite) {
     return list.includes(listingId);
   }, [listingId, currentUser]);
 
-  const toggleFavorite = useCallback(
-    async (event: MouseEvent<HTMLDivElement>) => {
-      event.stopPropagation();
-
-      if (!currentUser) {
-        return loginModal.onOpen();
-      }
-
-      try {
-        let request;
-        if (hasFavorite)
-          request = () => axios.delete(`/api/favorites/${listingId}`);
-        else request = () => axios.post(`/api/favorites/${listingId}`);
-        await request();
-        router.refresh();
-        toast.success("Success");
-      } catch (error) {
-        console.log(error);
-        toast.error("Something went wrong.");
+  const { mutate } = useMutation(
+    () => {
+      if (hasFavorite) {
+        return axios.delete(`/api/favorites/${listingId}`);
+      } else {
+        return axios.post(`/api/favorites/${listingId}`);
       }
     },
-    [currentUser, hasFavorite, listingId, loginModal, router],
+    {
+      onSuccess: () => {
+        router.refresh();
+        toast.success("Success");
+      },
+      onError: (error) => {
+        console.error(error);
+        toast.error("Something went wrong.");
+      },
+    },
+  );
+
+  const toggleFavorite = useCallback(
+    (event: MouseEvent<HTMLDivElement>) => {
+      event.stopPropagation();
+      if (!currentUser) return loginModal.onOpen();
+      mutate();
+    },
+    [currentUser, loginModal, mutate],
   );
 
   return {

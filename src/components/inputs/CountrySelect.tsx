@@ -1,26 +1,14 @@
 import Select from "react-select";
 
 import useCountries from "@/hooks/useCountries";
-
-export type CountrySelectValue = {
-  flag: string;
-  label: string;
-  latlng: number[];
-  region: string;
-  value: string;
-};
-
-interface CountrySelectProps {
-  value?: CountrySelectValue | null | any;
-  onChange: (value: CountrySelectValue) => void;
-}
+import { CountrySelectProps, CountrySelectValue } from "@/types";
 
 export default function CountrySelect({ onChange, value }: CountrySelectProps) {
   const { getAll } = useCountries();
 
   return (
     <Select
-      className="z-[9999]"
+      className="z-20"
       placeholder="Anywhere"
       isClearable
       options={getAll()}

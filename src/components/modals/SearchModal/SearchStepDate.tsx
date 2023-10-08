@@ -1,5 +1,5 @@
 import React from "react";
-import { Range, RangeKeyDict } from "react-date-range";
+import { Range } from "react-date-range";
 
 import Heading from "@/components/Heading";
 import Calendar from "@/components/inputs/Calendar";

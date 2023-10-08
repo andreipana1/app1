@@ -6,12 +6,12 @@ import qs from "query-string";
 import React, { useCallback, useMemo, useState } from "react";
 import { Range } from "react-date-range";
 
-import { CountrySelectValue } from "@/components/inputs/CountrySelect";
 import Modal from "@/components/modals/Modal";
 import BodyContent from "@/components/modals/SearchModal/BodyContent";
 import SearchStepDate from "@/components/modals/SearchModal/SearchStepDate";
 import SearchStepInfo from "@/components/modals/SearchModal/SearchStepInfo";
 import useSearchModal from "@/hooks/useSearchModal";
+import { CountrySelectValue } from "@/types";
 
 enum STEPS {
   LOCATION = 0,

@@ -1,14 +1,8 @@
 import React from "react";
-import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 
 import Heading from "@/components/Heading";
 import Input from "@/components/inputs/Input";
-
-interface Props {
-  isLoading: boolean;
-  register: UseFormRegister<FieldValues>;
-  errors: FieldErrors<FieldValues>;
-}
+import { LoginBodyContentProps as Props } from "@/types";
 
 export default function LoginBodyContent({
   errors,

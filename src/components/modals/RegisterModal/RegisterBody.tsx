@@ -4,12 +4,7 @@ import { FieldErrors } from "react-hook-form";
 
 import Heading from "@/components/Heading";
 import Input from "@/components/inputs/Input";
-
-type Props = {
-  isLoading: boolean;
-  register: any;
-  errors: FieldErrors;
-};
+import { LoginBodyContentProps as Props } from "@/types";
 
 export default function RegisterBody({ register, errors, isLoading }: Props) {
   return (

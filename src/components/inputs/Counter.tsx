@@ -14,21 +14,27 @@ export default function Counter({ onChange, value, subtitle, title }: Props) {
   }, [onChange, value]);
 
   return (
-    <div className="counter">
-      <div className="control__header">
-        <div className="font-medium">{title}</div>
-        <div className="font-light text-gray-600">{subtitle}</div>
-      </div>
+    <section className="counter">
+      <header className="control__header">
+        <h2 className="font-medium">{title}</h2>
+        <h3 className="font-light text-gray-600">{subtitle}</h3>
+      </header>
 
-      <div className="flex flex-row items-center gap-4">
-        <div onClick={onReduce} className="control-counter">
+      <article className="flex flex-row items-center gap-4">
+        <div
+          onClick={onReduce}
+          className="control-counter"
+          aria-label="Reducer"
+        >
           <AiOutlineMinus />
         </div>
+
         <div className="font-light text-xl text-neutral-600">{value}</div>
-        <div onClick={onAdd} className="control-counter">
+
+        <div onClick={onAdd} className="control-counter" aria-label="Add">
           <AiOutlinePlus />
         </div>
-      </div>
-    </div>
+      </article>
+    </section>
   );
 }

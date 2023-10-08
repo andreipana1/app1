@@ -1,10 +1,9 @@
 import React from "react";
 
 import Heading from "@/components/Heading";
-import CountrySelect, {
-  CountrySelectValue,
-} from "@/components/inputs/CountrySelect";
+import CountrySelect from "@/components/inputs/CountrySelect";
 import Map from "@/components/Map";
+import { CountrySelectValue } from "@/types";
 
 type Props = {
   location: CountrySelectValue | null;

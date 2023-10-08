@@ -2,9 +2,8 @@ import dynamic from "next/dynamic";
 import React from "react";
 
 import Heading from "@/components/Heading";
-import CountrySelect, {
-  CountrySelectValue,
-} from "@/components/inputs/CountrySelect";
+import CountrySelect from "@/components/inputs/CountrySelect";
+import { CountrySelectValue } from "@/types";
 
 interface Props {
   location: CountrySelectValue | undefined;

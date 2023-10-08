@@ -151,3 +151,22 @@ export interface ListingCardProps {
   actionId?: string;
   currentUser?: SafeUser | null;
 }
+
+export type CountrySelectValue = {
+  flag: string;
+  label: string;
+  latlng: number[];
+  region: string;
+  value: string;
+};
+
+export interface CountrySelectProps {
+  value?: CountrySelectValue | null | any;
+  onChange: (value: CountrySelectValue) => void;
+}
+
+export interface LoginBodyContentProps {
+  isLoading: boolean;
+  register: UseFormRegister<FieldValues> | any;
+  errors: FieldErrors<FieldValues>;
+}
