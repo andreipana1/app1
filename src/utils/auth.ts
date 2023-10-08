@@ -1,9 +1,10 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import bcrypt from "bcrypt";
-import { NextAuthOptions } from "next-auth";
+import { getServerSession, NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 
+import { SessionInterface } from "@/types";
 import prisma from "@/utils/connect";
 
 export const authOptions: NextAuthOptions = {
@@ -45,6 +46,45 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+  callbacks: {
+    async session({ session, user, token }) {
+      try {
+        const currentUser = await prisma.user.findUnique({
+          where: {
+            email: session?.user?.email as string,
+          },
+        });
+
+        const favorites = await prisma.listing.findMany({
+          where: {
+            id: {
+              in: [...(currentUser?.favoriteIds || [])],
+            },
+          },
+        });
+
+        if (!currentUser) return session;
+
+        return {
+          ...session,
+          user: {
+            ...session.user,
+            ...currentUser,
+            favorites: favorites.map((favorite) => ({
+              ...favorite,
+              createdAt: favorite.createdAt.toString(),
+            })),
+            createdAt: currentUser.createdAt.toISOString(),
+            updatedAt: currentUser.updatedAt.toISOString(),
+            emailVerified: currentUser.emailVerified?.toISOString() || null,
+          },
+        };
+      } catch (error) {
+        console.log("Error retrieving user data", error);
+        return session;
+      }
+    },
+  },
   session: {
     strategy: "jwt",
   },
@@ -54,3 +94,7 @@ export const authOptions: NextAuthOptions = {
   debug: process.env.NODE_ENV !== "production",
   secret: process.env.NEXTAUTH_SECRET,
 };
+
+export async function getCurrentUser() {
+  return (await getServerSession(authOptions)) as SessionInterface;
+}

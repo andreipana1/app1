@@ -12,7 +12,6 @@ import { ListingCardProps as Props } from "@/types";
 import { formatToMoney } from "@/utils/helpers";
 
 export default function ListingCard({
-  currentUser,
   actionId = "",
   onAction,
   actionLabel,
@@ -63,7 +62,7 @@ export default function ListingCard({
             className="object-cover h-full w-full group-hover:scale-110 transition"
           />
           <div className="absolute top-3 right-3">
-            <HeartButton listingId={data.id} currentUser={currentUser} />
+            <HeartButton listingId={data.id} />
           </div>
         </figure>
 

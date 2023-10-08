@@ -1,25 +1,26 @@
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { MouseEvent, useCallback, useMemo } from "react";
 import { toast } from "react-hot-toast";
 
 import useLoginModal from "@/hooks/useLoginModal";
-import { SafeUser } from "@/types";
 
 interface IUseFavorite {
   listingId: string;
-  currentUser?: SafeUser | null;
 }
 
-export default function useFavorite({ currentUser, listingId }: IUseFavorite) {
+export default function useFavorite({ listingId }: IUseFavorite) {
   const router = useRouter();
   let loginModal = useLoginModal();
+  const { status, data } = useSession();
 
+  console.log({ data });
   const hasFavorite = useMemo(() => {
-    const list = currentUser?.favoriteIds || [];
+    const list = data?.user.favoriteIds || [];
     return list.includes(listingId);
-  }, [listingId, currentUser]);
+  }, [data?.user.favoriteIds, listingId]);
 
   const { mutate } = useMutation(
     () => {
@@ -44,10 +45,10 @@ export default function useFavorite({ currentUser, listingId }: IUseFavorite) {
   const toggleFavorite = useCallback(
     (event: MouseEvent<HTMLDivElement>) => {
       event.stopPropagation();
-      if (!currentUser) return loginModal.onOpen();
+      if (status === "unauthenticated") return loginModal.onOpen();
       mutate();
     },
-    [currentUser, loginModal, mutate],
+    [loginModal, mutate, status],
   );
 
   return {

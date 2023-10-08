@@ -14,12 +14,13 @@ export interface Props {
 }
 
 export interface SessionInterface extends Session {
-  user: User & {
-    name: string;
-    email: string;
-    image: string;
-    isAdmin: boolean;
-  };
+  user: User &
+    SafeUser & {
+      name: string;
+      email: string;
+      image: string;
+      isAdmin: boolean;
+    };
 }
 
 export type SafeUser = Omit<
@@ -73,7 +74,6 @@ export interface CounterProps {
 
 export interface HeartButtonProps {
   listingId: string;
-  currentUser?: SafeUser | null;
 }
 
 export interface HeadingProps {
@@ -153,7 +153,6 @@ export interface ListingCardProps {
   disabled?: boolean;
   actionLabel?: string;
   actionId?: string;
-  currentUser?: SafeUser | null;
 }
 
 export type CountrySelectValue = {
