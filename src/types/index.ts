@@ -1,6 +1,6 @@
 import { Listing, Reservation } from "@prisma/client";
 import { Session, User } from "next-auth";
-import React, { ReactNode } from "react";
+import React, { ButtonHTMLAttributes, ReactNode } from "react";
 import { Range } from "react-date-range";
 import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 import { IconType } from "react-icons";
@@ -92,7 +92,7 @@ export interface ListingHeadProps {
   currentUser?: SafeUser | null;
 }
 
-export interface ButtonProps {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
