@@ -27,8 +27,7 @@ export default function Search() {
     if (startDate && endDate) {
       const start = new Date(startDate);
       const end = new Date(endDate);
-      const diff = differenceInDays(end, start);
-      const days = diff === 0 ? 1 : diff;
+      const days = differenceInDays(end, start) || 1;
 
       return `${days} Day${days !== 1 ? "s" : ""}`;
     }
