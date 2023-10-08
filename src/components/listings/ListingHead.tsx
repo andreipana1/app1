@@ -25,7 +25,7 @@ export default function ListingHead({ id, ...rest }: Props) {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         <div className="absolute top-5 right-5">
-          <HeartButton listingId={id} currentUser={rest.currentUser} />
+          <HeartButton listingId={id} />
         </div>
       </figure>
     </>
