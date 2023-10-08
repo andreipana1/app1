@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 
@@ -10,13 +10,10 @@ import MenuItem from "@/components/navbar/MenuItem";
 import useLoginModal from "@/hooks/useLoginModal";
 import useRegisterModal from "@/hooks/useRegisterModal";
 import useRentModal from "@/hooks/useRentModal";
-import { SafeUser } from "@/types";
 
-interface UserMenuProps {
-  currentUser?: SafeUser | null;
-}
+export default function UserMenu() {
+  const { data, status } = useSession();
 
-export default function UserMenu({ currentUser }: UserMenuProps) {
   const router = useRouter();
 
   const loginModal = useLoginModal();
@@ -31,9 +28,9 @@ export default function UserMenu({ currentUser }: UserMenuProps) {
   }, []);
 
   const onRent = useCallback(() => {
-    if (!currentUser) return loginModal.onOpen();
+    if (status === "unauthenticated") return loginModal.onOpen();
     return rentModal.onOpen();
-  }, [currentUser, rentModal, loginModal]);
+  }, [loginModal, rentModal, status]);
 
   const closeModalRef = useCallback((event: any) => {
     if (modalRef.current?.contains(event.target as Node)) return;
@@ -62,7 +59,7 @@ export default function UserMenu({ currentUser }: UserMenuProps) {
         >
           <AiOutlineMenu />
           <div className="hidden md:block">
-            <Avatar src={currentUser?.image} />
+            <Avatar src={data?.user.image} />
           </div>
         </div>
       </div>
@@ -70,7 +67,7 @@ export default function UserMenu({ currentUser }: UserMenuProps) {
       {isOpen && (
         <div className="absolute rounded-xl shadow-md w-[40vm] md:w-[230px] bg-white overflow-hidden right-0 top-12 text-sm">
           <div className="flex flex-col cursor-pointer">
-            {currentUser ? (
+            {status === "authenticated" ? (
               <>
                 <MenuItem
                   label="My trips"

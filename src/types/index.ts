@@ -31,6 +31,7 @@ export type SafeUser = Omit<
   updatedAt: string;
   emailVerified: string | null;
   favoriteIds?: string[];
+  favorites?: Favorite[];
 };
 
 export type SafeListing = Omit<Listing, "createdAt"> & {
@@ -93,7 +94,6 @@ export interface ListingHeadProps {
   locationValue: string;
   imageSrc: string;
   id: string;
-  currentUser?: SafeUser | null;
 }
 
 export interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
@@ -130,7 +130,7 @@ export interface ListingReservationProps {
   onChangeDate: (value: Range) => void;
   onSubmit: () => void;
   disabled?: boolean;
-  disabledDates: Date[];
+  disabledDates: Date[] | SafeReservation | never[];
 }
 
 export interface ModalProps {
@@ -172,4 +172,28 @@ export interface LoginBodyContentProps {
   isLoading: boolean;
   register: UseFormRegister<FieldValues> | any;
   errors: FieldErrors<FieldValues>;
+}
+
+export type Favorite = {
+  bathroomCount: number;
+  category: string;
+  createdAt: string;
+  description: string;
+  guestCount: number;
+  id: string;
+  imageSrc: string;
+  locationValue: string;
+  price: number;
+  roomCount: number;
+  title: string;
+  userId: string;
+};
+
+export interface ListingClientProps {
+  reservations?: SafeReservation[];
+  listing:
+    | (SafeListing & {
+        user: SafeUser;
+      })
+    | any;
 }

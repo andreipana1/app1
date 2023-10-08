@@ -4,7 +4,8 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { differenceInDays, eachDayOfInterval } from "date-fns";
 import { useRouter } from "next/navigation";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { useSession } from "next-auth/react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Range } from "react-date-range";
 import { toast } from "react-hot-toast";
 
@@ -14,7 +15,7 @@ import ListingInfo from "@/components/listings/ListingInfo";
 import ListingReservation from "@/components/listings/ListingReservation";
 import { categories } from "@/constants";
 import useLoginModal from "@/hooks/useLoginModal";
-import { SafeListing, SafeReservation, SafeUser } from "@/types";
+import { ListingClientProps as Props } from "@/types";
 
 const initialDateRange = {
   startDate: new Date(),
@@ -22,23 +23,10 @@ const initialDateRange = {
   key: "selection",
 };
 
-interface ListingClientProps {
-  reservations?: SafeReservation[];
-  listing:
-    | (SafeListing & {
-        user: SafeUser;
-      })
-    | any;
-  currentUser?: SafeUser | null;
-}
-
-export default function ListingClient({
-  listing,
-  currentUser,
-  reservations,
-}: ListingClientProps) {
+export default function ListingClient({ listing, reservations }: Props) {
   const router = useRouter();
   const loginModal = useLoginModal();
+  const { status } = useSession();
 
   const [totalPrice, setTotalPrice] = useState(listing.price);
   const [dateRange, setDateRange] = useState<Range>(initialDateRange);
@@ -62,9 +50,9 @@ export default function ListingClient({
   });
 
   const handleCreateReservation = useCallback(() => {
-    if (!currentUser) return loginModal.onOpen();
+    if (status === "authenticated") return loginModal.onOpen();
     mutate();
-  }, [currentUser, loginModal, mutate]);
+  }, [loginModal, mutate, status]);
 
   const disableDates = useMemo(() => {
     if (!reservations || reservations.length === 0) {
@@ -102,7 +90,7 @@ export default function ListingClient({
     <Container>
       <div className="max-w-screen-lg mx-auto">
         <div className="flex flex-col gap-6">
-          <ListingHead {...listing} currentUser={currentUser} />
+          <ListingHead {...listing} />
 
           <section className="grid grid-cols-1 md:grid-cols-7 md:gap-10 mt-6">
             <ListingInfo {...listing} category={category} />
@@ -114,7 +102,6 @@ export default function ListingClient({
                 dateRange={dateRange}
                 onSubmit={handleCreateReservation}
                 disabled={isLoading}
-                // @ts-ignore
                 disabledDates={disableDates}
               />
             </aside>

@@ -1,6 +1,6 @@
 import { NextResponse as res } from "next/server";
 
-import getCurrentUser from "@/actions/getCurrentUser";
+import { getCurrentUser } from "@/utils/auth";
 import prisma from "@/utils/connect";
 
 interface IParams {
@@ -20,13 +20,13 @@ export async function POST(req: Request, { params }: IParams) {
     throw new Error("Invalid ID");
   }
 
-  let favoriteIds = [...(currentUser.favoriteIds || [])];
+  let favoriteIds = [...(currentUser.user.favoriteIds || [])];
 
   favoriteIds.push(listingId);
 
   const user = await prisma.user.update({
     where: {
-      id: currentUser.id,
+      id: currentUser.user.id,
     },
     data: {
       favoriteIds,
@@ -49,13 +49,13 @@ export async function DELETE(req: Request, { params }: IParams) {
     throw new Error("Invalid ID");
   }
 
-  let favoriteIds = [...(currentUser.favoriteIds || [])];
+  let favoriteIds = [...(currentUser.user.favoriteIds || [])];
 
   favoriteIds = favoriteIds.filter((id) => id !== listingId);
 
   const user = await prisma.user.update({
     where: {
-      id: currentUser.id,
+      id: currentUser.user.id,
     },
     data: {
       favoriteIds,

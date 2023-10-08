@@ -1,14 +1,13 @@
 import { NextResponse as res } from "next/server";
 
-import getCurrentUser from "@/actions/getCurrentUser";
+import { getCurrentUser } from "@/utils/auth";
 import prisma from "@/utils/connect";
 
 export async function POST(req: Request) {
   const currentUser = await getCurrentUser();
+  const body = await req.json();
 
   if (!currentUser) return res.error();
-
-  const body = await req.json();
 
   const {
     title,
@@ -37,7 +36,7 @@ export async function POST(req: Request) {
       guestCount,
       locationValue: location.value,
       price: parseInt(price, 10),
-      userId: currentUser.id,
+      userId: currentUser.user.id,
     },
   });
 

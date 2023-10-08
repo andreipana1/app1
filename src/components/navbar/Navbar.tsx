@@ -5,13 +5,8 @@ import Categories from "@/components/navbar/Categories";
 import Logo from "@/components/navbar/Logo";
 import Search from "@/components/navbar/Search";
 import UserMenu from "@/components/navbar/UserMenu";
-import { SafeUser } from "@/types";
 
-interface NavbarProps {
-  currentUser?: SafeUser | null;
-}
-
-export default function Navbar({ currentUser }: NavbarProps) {
+export default function Navbar() {
   return (
     <nav className="fixed w-full bg-white z-10 shadow-sm">
       <header className="py-4 border-b-[1px]">
@@ -19,7 +14,7 @@ export default function Navbar({ currentUser }: NavbarProps) {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-0 items-center">
             <Logo />
             <Search />
-            <UserMenu currentUser={currentUser} />
+            <UserMenu />
           </div>
         </Container>
       </header>

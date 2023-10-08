@@ -1,6 +1,6 @@
 import { NextResponse as res } from "next/dist/server/web/spec-extension/response";
 
-import getCurrentUser from "@/actions/getCurrentUser";
+import { getCurrentUser } from "@/utils/auth";
 import prisma from "@/utils/connect";
 
 interface IParams {
@@ -25,7 +25,10 @@ export async function DELETE(req: Request, { params }: IParams) {
   const reservation = await prisma.reservation.deleteMany({
     where: {
       id: reservationId,
-      OR: [{ userId: currentUser.id }, { listing: { userId: currentUser.id } }],
+      OR: [
+        { userId: currentUser.user.id },
+        { listing: { userId: currentUser.user.id } },
+      ],
     },
   });
 

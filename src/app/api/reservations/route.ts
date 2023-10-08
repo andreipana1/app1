@@ -1,6 +1,6 @@
 import { NextResponse as res } from "next/server";
 
-import getCurrentUser from "@/actions/getCurrentUser";
+import { getCurrentUser } from "@/utils/auth";
 import prisma from "@/utils/connect";
 
 export async function POST(req: Request) {
@@ -22,7 +22,7 @@ export async function POST(req: Request) {
     data: {
       reservations: {
         create: {
-          userId: currentUser.id,
+          userId: currentUser.user.id,
           startDate,
           endDate,
           totalPrice,

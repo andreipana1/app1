@@ -16,7 +16,6 @@ export default function useFavorite({ listingId }: IUseFavorite) {
   let loginModal = useLoginModal();
   const { status, data } = useSession();
 
-  console.log({ data });
   const hasFavorite = useMemo(() => {
     const list = data?.user.favoriteIds || [];
     return list.includes(listingId);

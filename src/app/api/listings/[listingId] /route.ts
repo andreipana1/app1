@@ -1,6 +1,6 @@
 import { NextResponse as res } from "next/server";
 
-import getCurrentUser from "@/actions/getCurrentUser";
+import { getCurrentUser } from "@/utils/auth";
 import prisma from "@/utils/connect";
 
 interface IParams {
@@ -23,7 +23,7 @@ export async function DELETE(req: Request, { params }: IParams) {
   const listing = await prisma.listing.deleteMany({
     where: {
       id: listingId,
-      userId: currentUser.id,
+      userId: currentUser.user.id,
     },
   });
 

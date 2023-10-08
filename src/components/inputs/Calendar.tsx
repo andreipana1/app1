@@ -1,9 +1,11 @@
 import { DateRange, Range, RangeKeyDict } from "react-date-range";
 
+import { SafeReservation } from "@/types";
+
 interface DatePickerProps {
   value: Range;
   onChange: (value: RangeKeyDict) => void;
-  disabledDates?: Date[];
+  disabledDates?: Date[] | SafeReservation | never[];
 }
 
 export default function Calendar(props: DatePickerProps) {
@@ -16,7 +18,7 @@ export default function Calendar(props: DatePickerProps) {
       direction="vertical"
       showDateDisplay={false}
       minDate={new Date()}
-      disabledDates={props.disabledDates}
+      disabledDates={props.disabledDates as Date[]}
     />
   );
 }

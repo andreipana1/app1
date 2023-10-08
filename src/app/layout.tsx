@@ -6,7 +6,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 
-import getCurrentUser from "@/actions/getCurrentUser";
 import LoginModal from "@/components/modals/LoginModal";
 import RegisterModal from "@/components/modals/RegisterModal";
 import RentModal from "@/components/modals/RentModal";
@@ -24,8 +23,6 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: Props) {
-  const currentUser = await getCurrentUser();
-
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -36,7 +33,7 @@ export default async function RootLayout({ children }: Props) {
             <RegisterModal />
             <SearchModal />
             <RentModal />
-            <Navbar currentUser={currentUser} />
+            <Navbar />
             <div className="pb-20 pt-28">{children}</div>
           </QueryProvider>
         </AuthProvider>
