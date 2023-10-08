@@ -25,7 +25,7 @@ export default function EmptyState({
       <div className="w-48 mt-4">
         {showReset && (
           <Button
-            outline
+            outline={true}
             label="Remove all filters"
             onClick={() => router.push("/")}
           />

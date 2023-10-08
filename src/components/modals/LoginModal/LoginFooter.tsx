@@ -22,7 +22,7 @@ export default function LoginFooter() {
     <div className="flex flex-col gap-4 mt-3">
       <hr />
       <Button
-        outline
+        outline={true}
         label="Continue with Google"
         icon={FcGoogle}
         onClick={() => signIn("google")}
