@@ -21,7 +21,7 @@ export default function RegisterFooter() {
     <div className="flex flex-col gap-4 mt-3">
       <hr />
       <Button
-        outline={true}
+        outline
         label="Continue with Google"
         icon={FcGoogle}
         onClick={() => signIn("google")}
