@@ -6,20 +6,22 @@ import { MouseEvent, useCallback, useMemo } from "react";
 import { toast } from "react-hot-toast";
 
 import useLoginModal from "@/hooks/useLoginModal";
+import { SessionInterface } from "@/types";
 
 interface IUseFavorite {
   listingId: string;
+  currentUser?: SessionInterface | null;
 }
 
-export default function useFavorite({ listingId }: IUseFavorite) {
+export default function useFavorite({ listingId, currentUser }: IUseFavorite) {
   const router = useRouter();
   let loginModal = useLoginModal();
-  const { status, data } = useSession();
+  const { status } = useSession();
 
   const hasFavorite = useMemo(() => {
-    const list = data?.user.favoriteIds || [];
+    const list = currentUser?.user.favoriteIds || [];
     return list.includes(listingId);
-  }, [data?.user.favoriteIds, listingId]);
+  }, [currentUser?.user.favoriteIds, listingId]);
 
   const { mutate } = useMutation(
     () => {

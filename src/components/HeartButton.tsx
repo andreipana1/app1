@@ -3,9 +3,10 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import useFavorite from "@/hooks/useFavorite";
 import { HeartButtonProps as Props } from "@/types";
 
-export default function HeartButton({ listingId }: Props) {
+export default function HeartButton({ listingId, currentUser }: Props) {
   const { toggleFavorite, hasFavorite } = useFavorite({
     listingId,
+    currentUser,
   });
 
   return (

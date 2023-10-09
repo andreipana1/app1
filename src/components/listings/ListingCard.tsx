@@ -18,6 +18,7 @@ export default function ListingCard({
   reservation,
   data,
   disabled,
+  currentUser,
 }: Props) {
   const router = useRouter();
   const { getByValue } = useCountries();
@@ -62,7 +63,7 @@ export default function ListingCard({
             className="object-cover h-full w-full group-hover:scale-110 transition"
           />
           <div className="absolute top-3 right-3">
-            <HeartButton listingId={data.id} />
+            <HeartButton listingId={data.id} currentUser={currentUser} />
           </div>
         </figure>
 

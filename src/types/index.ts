@@ -75,6 +75,7 @@ export interface CounterProps {
 
 export interface HeartButtonProps {
   listingId: string;
+  currentUser?: SessionInterface | null;
 }
 
 export interface HeadingProps {
@@ -147,12 +148,13 @@ export interface ModalProps {
 }
 
 export interface ListingCardProps {
-  data: SafeListing;
+  data: SafeListing | Favorite;
   reservation?: SafeReservation;
   onAction?: (id: string) => void;
   disabled?: boolean;
   actionLabel?: string;
   actionId?: string;
+  currentUser?: SessionInterface | null;
 }
 
 export type CountrySelectValue = {
