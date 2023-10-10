@@ -1,7 +1,7 @@
 import getListingById from "@/actions/getListingById";
 import getReservations from "@/actions/getReservations";
-import ListingClient from "@/app/listings/[listingId]/ListingClient";
 import EmptyState from "@/components/EmptyState";
+import ListingContainer from "@/components/ListingContainer";
 
 type Props = {
   params: {
@@ -14,5 +14,5 @@ export default async function ListingsPage({ params }: Props) {
 
   if (!listing) return <EmptyState />;
 
-  return <ListingClient listing={listing} reservations={reservations} />;
+  return <ListingContainer listing={listing} reservations={reservations} />;
 }

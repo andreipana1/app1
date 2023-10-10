@@ -23,7 +23,7 @@ const initialDateRange = {
   key: "selection",
 };
 
-export default function ListingClient({ listing, reservations }: Props) {
+export default function ListingContainer({ listing, reservations }: Props) {
   const router = useRouter();
   const loginModal = useLoginModal();
   const { status } = useSession();

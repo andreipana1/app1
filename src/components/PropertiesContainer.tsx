@@ -1,0 +1,55 @@
+"use client";
+
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { toast } from "react-hot-toast";
+
+import Container from "@/components/Container";
+import Heading from "@/components/Heading";
+import ListingCard from "@/components/listings/ListingCard";
+import { SafeListing, SessionInterface } from "@/types";
+
+interface Props {
+  listings: SafeListing[];
+  currentUser?: SessionInterface | null;
+}
+
+export default function PropertiesContainer({ listings, currentUser }: Props) {
+  const router = useRouter();
+  const [deletingId, setDeletingId] = useState("");
+
+  const { mutate } = useMutation({
+    mutationFn: (id) => {
+      return axios.delete(`/api/listings/${id}`);
+    },
+    onSuccess: () => {
+      toast.success("Listing deleted");
+      router.refresh();
+    },
+    onError: () => {
+      toast.error("Error");
+    },
+  });
+
+  return (
+    <Container>
+      <Heading title="Properties" subtitle="List of your properties" />
+      <section className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
+        {listings.map((item) => (
+          <ListingCard
+            key={item.id}
+            data={item}
+            actionId={item.id}
+            // @ts-ignore
+            onAction={mutate}
+            disabled={deletingId === item.id}
+            actionLabel="Delete property"
+            currentUser={currentUser}
+          />
+        ))}
+      </section>
+    </Container>
+  );
+}
