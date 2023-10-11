@@ -26,7 +26,6 @@ export default function PropertiesContainer({ listings, currentUser }: Props) {
     onSuccess: () => {
       toast.success("Listing deleted");
       router.refresh();
-      setDeletingId("");
     },
     onError: () => {
       toast.error("Error");
@@ -40,7 +39,6 @@ export default function PropertiesContainer({ listings, currentUser }: Props) {
           key={item.id}
           data={item}
           actionId={item.id}
-          // @ts-ignore
           onAction={mutate}
           disabled={deletingId === item.id}
           actionLabel="Delete property"

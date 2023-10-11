@@ -1,5 +1,7 @@
 import getReservations from "@/actions/getReservations";
+import Container from "@/components/Container";
 import EmptyState from "@/components/EmptyState";
+import Heading from "@/components/Heading";
 import TripContainer from "@/components/TripContainer";
 import { getCurrentUser } from "@/utils/auth";
 
@@ -19,6 +21,12 @@ export default async function TripsPage() {
     );
 
   return (
-    <TripContainer reservations={reservations} currentUser={currentUser} />
+    <Container>
+      <Heading
+        title="Trips"
+        subtitle="Where you've been and where you're going"
+      />
+      <TripContainer reservations={reservations} currentUser={currentUser} />
+    </Container>
   );
 }

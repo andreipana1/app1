@@ -43,7 +43,6 @@ export default function ReservationContainer({
           data={reservation.listing}
           reservation={reservation}
           actionId={reservation.id}
-          // @ts-ignore
           onAction={mutate}
           disabled={deletingId === reservation.id}
           actionLabel="Cancel guest reservation"

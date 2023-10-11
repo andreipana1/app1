@@ -54,14 +54,12 @@ export default function ListingContainer({
   });
 
   const handleCreateReservation = useCallback(() => {
-    if (status === "authenticated") return loginModal.onOpen();
+    if (status === "unauthenticated") return loginModal.onOpen();
     mutate();
   }, [loginModal, mutate, status]);
 
   const disableDates = useMemo(() => {
-    if (!reservations || reservations.length === 0) {
-      return [];
-    }
+    if (!reservations || reservations.length === 0) return [];
 
     // @ts-ignore
     return reservations.reduce((allDates, reservation) => {
