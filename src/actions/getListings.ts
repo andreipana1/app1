@@ -26,13 +26,12 @@ export default async function getListings(params: IListingsParams) {
 
     let query: any = {};
 
-    if (userId) {
-      query.userId = userId;
-    }
-
-    if (category) {
-      query.category = category;
-    }
+    query = {
+      ...query,
+      ...(userId ? { userId } : {}),
+      ...(category ? { category } : {}),
+      ...(locationValue ? { locationValue } : {}),
+    };
 
     if (roomCount) {
       query.roomCount = {
@@ -50,10 +49,6 @@ export default async function getListings(params: IListingsParams) {
       query.bathroomCount = {
         gte: +bathroomCount,
       };
-    }
-
-    if (locationValue) {
-      query.locationValue = locationValue;
     }
 
     if (startDate && endDate) {
