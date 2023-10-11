@@ -43,7 +43,7 @@ export default function Search() {
   return (
     <button
       onClick={searchModal.onOpen}
-      className="border-[1px] w-full md:w-max mx-auto py-2 rounded-full shadow-sm hover:shadow-md transition cursor-pointer"
+      className="border-[1px] w-full md:w-max justify-self-center py-2 rounded-full shadow-sm hover:shadow-md transition cursor-pointer"
     >
       <div className="flex flex-row items-center justify-between">
         <div className="text-sm font-semibold px-6">{locationLabel}</div>
