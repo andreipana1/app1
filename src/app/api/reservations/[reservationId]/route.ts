@@ -12,9 +12,7 @@ interface IParams {
 export async function DELETE(req: Request, { params }: IParams) {
   const currentUser = await getCurrentUser();
 
-  if (!currentUser) {
-    return res.error();
-  }
+  if (!currentUser) return res.error();
 
   const { reservationId } = params;
 
