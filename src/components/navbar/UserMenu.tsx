@@ -45,15 +45,15 @@ export default function UserMenu() {
   }, [closeModalRef]);
 
   return (
-    <div className="relative w-max ml-auto" ref={modalRef}>
+    <nav className="relative w-max ml-auto" ref={modalRef}>
       <div className="flex items-center gap-3">
-        <div
+        <button
           onClick={onRent}
           className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
         >
           Airbnb your home
-        </div>
-        <div
+        </button>
+        <button
           onClick={toggleOpen}
           className="p-4 md:py-1 md:px-2 border-[1px] border-neutral-200 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition"
         >
@@ -61,7 +61,7 @@ export default function UserMenu() {
           <div className="hidden md:block">
             <Avatar src={data?.user.image} />
           </div>
-        </div>
+        </button>
       </div>
 
       {isOpen && (
@@ -69,35 +69,42 @@ export default function UserMenu() {
           <div className="flex flex-col cursor-pointer">
             {status === "authenticated" ? (
               <>
-                <MenuItem
-                  label="My trips"
-                  onClick={() => router.push("/trips")}
-                />
-                <MenuItem
-                  label="My favorites"
-                  onClick={() => router.push("/favorites")}
-                />
-                <MenuItem
-                  label="My reservations"
-                  onClick={() => router.push("/reservations")}
-                />
-                <MenuItem
-                  label="My properties"
-                  onClick={() => router.push("/properties")}
-                />
-                <MenuItem label="Airbnb your home" onClick={rentModal.onOpen} />
-                <hr />
-                <MenuItem label="Logout" onClick={() => signOut()} />
+                <MenuItem label="My trips" url="/trips" />
+                <MenuItem label="My favorites" url="/favorites" />
+                <MenuItem label="My reservations" url="/reservations" />
+                <MenuItem label="My properties" url="/properties" />
+                <button
+                  onClick={rentModal.onOpen}
+                  className="px-4 py-3 hover:bg-neutral-100 transition font-semibold text-left"
+                >
+                  Airbnb your home
+                </button>
+                <button
+                  onClick={() => signOut()}
+                  className="px-4 py-3 hover:bg-neutral-100 transition font-semibold text-left"
+                >
+                  Logout
+                </button>
               </>
             ) : (
               <>
-                <MenuItem onClick={loginModal.onOpen} label="Login" />
-                <MenuItem onClick={registerModal.onOpen} label="Sign up" />
+                <button
+                  onClick={loginModal.onOpen}
+                  className="px-4 py-3 hover:bg-neutral-100 transition font-semibold text-left"
+                >
+                  Login
+                </button>
+                <button
+                  onClick={registerModal.onOpen}
+                  className="px-4 py-3 hover:bg-neutral-100 transition font-semibold text-left"
+                >
+                  Sign up
+                </button>
               </>
             )}
           </div>
         </div>
       )}
-    </div>
+    </nav>
   );
 }

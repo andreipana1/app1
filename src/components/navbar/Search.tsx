@@ -41,7 +41,7 @@ export default function Search() {
   }, [guestCount]);
 
   return (
-    <div
+    <button
       onClick={searchModal.onOpen}
       className="border-[1px] w-full md:w-max mx-auto py-2 rounded-full shadow-sm hover:shadow-md transition cursor-pointer"
     >
@@ -57,6 +57,6 @@ export default function Search() {
           </div>
         </div>
       </div>
-    </div>
+    </button>
   );
 }

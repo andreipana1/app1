@@ -21,19 +21,19 @@ export default function Counter({ onChange, value, subtitle, title }: Props) {
       </header>
 
       <article className="flex flex-row items-center gap-4">
-        <div
+        <button
           onClick={onReduce}
           className="control-counter"
           aria-label="Reducer"
         >
           <AiOutlineMinus />
-        </div>
+        </button>
 
         <div className="font-light text-xl text-neutral-600">{value}</div>
 
-        <div onClick={onAdd} className="control-counter" aria-label="Add">
+        <button onClick={onAdd} className="control-counter" aria-label="Add">
           <AiOutlinePlus />
-        </div>
+        </button>
       </article>
     </section>
   );

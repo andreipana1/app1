@@ -1,17 +1,19 @@
 "use client";
 
+import Link from "next/link";
+
 interface MenuItemProps {
-  onClick: () => void;
+  url: string;
   label: string;
 }
 
-export default function MenuItem({ onClick, label }: MenuItemProps) {
+export default function MenuItem({ url, label }: MenuItemProps) {
   return (
-    <div
-      onClick={onClick}
+    <Link
+      href={url}
       className="px-4 py-3 hover:bg-neutral-100 transition font-semibold"
     >
       {label}
-    </div>
+    </Link>
   );
 }

@@ -1,19 +1,16 @@
-"use client";
-
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Logo() {
-  const router = useRouter();
-
   return (
-    <Image
-      src="/images/logo.png"
-      alt="Logo"
-      width={100}
-      height={100}
-      onClick={() => router.push("/")}
-      className="hidden md:block cursor-pointer h-auto w-auto"
-    />
+    <Link href="/" className="w-max inline-block">
+      <Image
+        src="/images/logo.png"
+        alt="Logo"
+        width={100}
+        height={100}
+        className="hidden md:block cursor-pointer h-auto w-auto"
+      />
+    </Link>
   );
 }
