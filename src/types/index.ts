@@ -95,6 +95,7 @@ export interface ListingHeadProps {
   locationValue: string;
   imageSrc: string;
   id: string;
+  currentUser?: SessionInterface | null;
 }
 
 export interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
@@ -192,6 +193,7 @@ export type Favorite = {
 };
 
 export interface ListingClientProps {
+  currentUser?: SessionInterface | null;
   reservations?: SafeReservation[];
   listing:
     | (SafeListing & {

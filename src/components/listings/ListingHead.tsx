@@ -6,7 +6,7 @@ import HeartButton from "@/components/HeartButton";
 import useCountries from "@/hooks/useCountries";
 import { ListingHeadProps as Props } from "@/types";
 
-export default function ListingHead({ id, ...rest }: Props) {
+export default function ListingHead({ id, currentUser, ...rest }: Props) {
   const { getByValue } = useCountries();
   const location = getByValue(rest.locationValue);
 
@@ -25,7 +25,7 @@ export default function ListingHead({ id, ...rest }: Props) {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         <div className="absolute top-5 right-5">
-          <HeartButton listingId={id} />
+          <HeartButton listingId={id} currentUser={currentUser} />
         </div>
       </figure>
     </>

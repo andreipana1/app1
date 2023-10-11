@@ -1,3 +1,5 @@
+"use client";
+
 import { PuffLoader } from "react-spinners";
 
 export default function Loader() {
