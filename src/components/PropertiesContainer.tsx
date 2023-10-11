@@ -19,12 +19,14 @@ export default function PropertiesContainer({ listings, currentUser }: Props) {
   const [deletingId, setDeletingId] = useState("");
 
   const { mutate } = useMutation({
-    mutationFn: (id) => {
+    mutationFn: (id: string) => {
+      setDeletingId(id);
       return axios.delete(`/api/listings/${id}`);
     },
     onSuccess: () => {
       toast.success("Listing deleted");
       router.refresh();
+      setDeletingId("");
     },
     onError: () => {
       toast.error("Error");
