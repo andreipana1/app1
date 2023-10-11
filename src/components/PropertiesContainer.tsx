@@ -6,8 +6,6 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 
-import Container from "@/components/Container";
-import Heading from "@/components/Heading";
 import ListingCard from "@/components/listings/ListingCard";
 import { SafeListing, SessionInterface } from "@/types";
 
@@ -34,22 +32,19 @@ export default function PropertiesContainer({ listings, currentUser }: Props) {
   });
 
   return (
-    <Container>
-      <Heading title="Properties" subtitle="List of your properties" />
-      <section className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
-        {listings.map((item) => (
-          <ListingCard
-            key={item.id}
-            data={item}
-            actionId={item.id}
-            // @ts-ignore
-            onAction={mutate}
-            disabled={deletingId === item.id}
-            actionLabel="Delete property"
-            currentUser={currentUser}
-          />
-        ))}
-      </section>
-    </Container>
+    <section className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
+      {listings.map((item) => (
+        <ListingCard
+          key={item.id}
+          data={item}
+          actionId={item.id}
+          // @ts-ignore
+          onAction={mutate}
+          disabled={deletingId === item.id}
+          actionLabel="Delete property"
+          currentUser={currentUser}
+        />
+      ))}
+    </section>
   );
 }

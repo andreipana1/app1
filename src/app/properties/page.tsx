@@ -1,7 +1,9 @@
 import React from "react";
 
 import getListings from "@/actions/getListings";
+import Container from "@/components/Container";
 import EmptyState from "@/components/EmptyState";
+import Heading from "@/components/Heading";
 import PropertiesContainer from "@/components/PropertiesContainer";
 import { getCurrentUser } from "@/utils/auth";
 
@@ -20,5 +22,10 @@ export default async function PropertiesPage() {
       />
     );
 
-  return <PropertiesContainer listings={listings} currentUser={currentUser} />;
+  return (
+    <Container>
+      <Heading title="Properties" subtitle="List of your properties" />
+      <PropertiesContainer listings={listings} currentUser={currentUser} />;
+    </Container>
+  );
 }
