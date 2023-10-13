@@ -6,8 +6,8 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
 import Modal from "@/components/modals/modal";
-import RegisterBody from "@/components/modals/RegisterModal/RegisterBody";
-import RegisterFooter from "@/components/modals/RegisterModal/RegisterFooter";
+import RegisterBody from "@/components/modals/register-modal/RegisterBody";
+import RegisterFooter from "@/components/modals/register-modal/RegisterFooter";
 import useLoginModal from "@/hooks/useLoginModal";
 import useRegisterModal from "@/hooks/useRegisterModal";
 

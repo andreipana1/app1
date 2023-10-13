@@ -7,9 +7,9 @@ import React, { useCallback, useMemo, useState } from "react";
 import { Range } from "react-date-range";
 
 import Modal from "@/components/modals/modal";
-import BodyContent from "@/components/modals/SearchModal/BodyContent";
-import SearchStepDate from "@/components/modals/SearchModal/SearchStepDate";
-import SearchStepInfo from "@/components/modals/SearchModal/SearchStepInfo";
+import BodyContent from "@/components/modals/search-modal/BodyContent";
+import SearchStepDate from "@/components/modals/search-modal/SearchStepDate";
+import SearchStepInfo from "@/components/modals/search-modal/SearchStepInfo";
 import useSearchModal from "@/hooks/useSearchModal";
 import { CountrySelectValue } from "@/types";
 
