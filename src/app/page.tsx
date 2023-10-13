@@ -2,6 +2,7 @@ import getListings, { IListingsParams } from "@/actions/getListings";
 import Container from "@/components/Container";
 import EmptyState from "@/components/EmptyState";
 import ListingCard from "@/components/listings/ListingCard";
+import Loader from "@/components/Loader";
 import { getCurrentUser } from "@/utils/auth";
 
 export const dynamic = "force-dynamic";
@@ -18,17 +19,19 @@ export default async function Home({ searchParams }: HomeProps) {
 
   if (listings.length === 0) return <EmptyState showReset />;
 
-  return (
-    <Container>
-      <section className="gridContainer">
-        {listings.map((listing) => (
-          <ListingCard
-            key={listing.id}
-            data={listing}
-            currentUser={currentUser}
-          />
-        ))}
-      </section>
-    </Container>
-  );
+  return <Loader />;
+
+  // return (
+  //   <Container>
+  //     <section className="gridContainer">
+  //       {listings.map((listing) => (
+  //         <ListingCard
+  //           key={listing.id}
+  //           data={listing}
+  //           currentUser={currentUser}
+  //         />
+  //       ))}
+  //     </section>
+  //   </Container>
+  // );
 }
