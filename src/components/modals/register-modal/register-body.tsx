@@ -1,7 +1,5 @@
 "use client";
 
-import { FieldErrors } from "react-hook-form";
-
 import Heading from "@/components/heading";
 import Input from "@/components/inputs/input";
 import { LoginBodyContentProps as Props } from "@/types";

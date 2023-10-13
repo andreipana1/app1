@@ -2,7 +2,6 @@
 
 import { signIn } from "next-auth/react";
 import { useCallback } from "react";
-import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 
 import Button from "@/components/button";

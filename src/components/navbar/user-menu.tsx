@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
@@ -13,8 +12,6 @@ import useRentModal from "@/hooks/useRentModal";
 
 export default function UserMenu() {
   const { data, status } = useSession();
-
-  const router = useRouter();
 
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
