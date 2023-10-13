@@ -11,8 +11,8 @@ import RegisterModal from "@/components/modals/RegisterModal";
 import RentModal from "@/components/modals/RentModal";
 import SearchModal from "@/components/modals/SearchModal";
 import Navbar from "@/components/navbar/Navbar";
-import AuthProvider from "@/providers/AuthProvider";
-import QueryProvider from "@/providers/QueryProvider";
+import AuthProvider from "@/providers/auth-provider";
+import QueryProvider from "@/providers/query-provider";
 import { Props } from "@/types";
 
 const inter = Inter({ subsets: ["latin"] });

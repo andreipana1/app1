@@ -1,6 +1,6 @@
 import React from "react";
 
-import Container from "@/components/Container";
+import Container from "@/components/container";
 import Categories from "@/components/navbar/Categories";
 import Logo from "@/components/navbar/Logo";
 import Search from "@/components/navbar/Search";

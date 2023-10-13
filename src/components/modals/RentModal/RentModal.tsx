@@ -7,7 +7,7 @@ import React, { useCallback, useMemo, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
-import Modal from "@/components/modals/Modal";
+import Modal from "@/components/modals/modal";
 import BodyContent from "@/components/modals/RentModal/BodyContent";
 import StepDescription from "@/components/modals/RentModal/StepDescription";
 import StepImages from "@/components/modals/RentModal/StepImages";

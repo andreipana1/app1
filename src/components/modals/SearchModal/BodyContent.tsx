@@ -1,8 +1,8 @@
 import dynamic from "next/dynamic";
 import React from "react";
 
-import Heading from "@/components/Heading";
-import CountrySelect from "@/components/inputs/CountrySelect";
+import Heading from "@/components/heading";
+import CountrySelect from "@/components/inputs/country-select";
 import { CountrySelectValue } from "@/types";
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
   setLocation: (value: CountrySelectValue) => void;
 }
 
-const Map = dynamic(() => import("../../Map"), {
+const Map = dynamic(() => import("../../map"), {
   loading: () => <p>loading...</p>,
   ssr: false,
 });

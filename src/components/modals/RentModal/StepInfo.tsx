@@ -1,7 +1,7 @@
 import React from "react";
 
-import Heading from "@/components/Heading";
-import Counter from "@/components/inputs/Counter";
+import Heading from "@/components/heading";
+import Counter from "@/components/inputs/counter";
 
 type Props = {
   guestCount: number;

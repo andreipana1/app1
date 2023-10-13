@@ -2,12 +2,12 @@
 
 import dynamic from "next/dynamic";
 
-import Avatar from "@/components/Avatar";
-import ListingCategory from "@/components/listings/ListingCategory";
+import Avatar from "@/components/avatar";
+import ListingCategory from "@/components/listings/listing-category";
 import useCountries from "@/hooks/useCountries";
 import { ListingInfoProps as Props } from "@/types";
 
-const Map = dynamic(() => import("../Map"), {
+const Map = dynamic(() => import("../map"), {
   loading: () => <p>loading...</p>,
   ssr: false,
 });

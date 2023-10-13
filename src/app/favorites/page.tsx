@@ -1,7 +1,7 @@
-import Container from "@/components/Container";
-import EmptyState from "@/components/EmptyState";
-import Heading from "@/components/Heading";
-import ListingCard from "@/components/listings/ListingCard";
+import Container from "@/components/container";
+import EmptyState from "@/components/empty-state";
+import Heading from "@/components/heading";
+import ListingCard from "@/components/listings/listing-card";
 import { getCurrentUser } from "@/utils/auth";
 
 export default async function FavoritePage() {

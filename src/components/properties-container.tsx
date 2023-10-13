@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 
-import ListingCard from "@/components/listings/ListingCard";
+import ListingCard from "@/components/listings/listing-card";
 import { SafeListing, SessionInterface } from "@/types";
 
 interface Props {

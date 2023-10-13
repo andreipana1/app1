@@ -4,7 +4,7 @@ import { signIn } from "next-auth/react";
 import { useCallback } from "react";
 import { FcGoogle } from "react-icons/fc";
 
-import Button from "@/components/Button";
+import Button from "@/components/button";
 import useLoginModal from "@/hooks/useLoginModal";
 import useRegisterModal from "@/hooks/useRegisterModal";
 

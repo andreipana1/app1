@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { twJoin } from "tailwind-merge";
 
-import Button from "@/components/Button";
+import Button from "@/components/button";
 import { ModalProps as Props } from "@/types";
 
 export default function Modal({

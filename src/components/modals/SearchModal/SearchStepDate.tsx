@@ -1,8 +1,8 @@
 import React from "react";
 import { Range } from "react-date-range";
 
-import Heading from "@/components/Heading";
-import Calendar from "@/components/inputs/Calendar";
+import Heading from "@/components/heading";
+import Calendar from "@/components/inputs/calendar";
 
 interface Props {
   dateRange: Range;

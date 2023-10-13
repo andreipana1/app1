@@ -5,7 +5,7 @@ import { signOut, useSession } from "next-auth/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 
-import Avatar from "@/components/Avatar";
+import Avatar from "@/components/avatar";
 import MenuItem from "@/components/navbar/MenuItem";
 import useLoginModal from "@/hooks/useLoginModal";
 import useRegisterModal from "@/hooks/useRegisterModal";

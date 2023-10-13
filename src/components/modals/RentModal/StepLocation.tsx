@@ -1,8 +1,8 @@
 import React from "react";
 
-import Heading from "@/components/Heading";
-import CountrySelect from "@/components/inputs/CountrySelect";
-import Map from "@/components/Map";
+import Heading from "@/components/heading";
+import CountrySelect from "@/components/inputs/country-select";
+import Map from "@/components/map";
 import { CountrySelectValue } from "@/types";
 
 type Props = {

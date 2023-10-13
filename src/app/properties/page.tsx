@@ -1,8 +1,8 @@
 import getListings from "@/actions/getListings";
-import Container from "@/components/Container";
-import EmptyState from "@/components/EmptyState";
-import Heading from "@/components/Heading";
-import PropertiesContainer from "@/components/PropertiesContainer";
+import Container from "@/components/container";
+import EmptyState from "@/components/empty-state";
+import Heading from "@/components/heading";
+import PropertiesContainer from "@/components/properties-container";
 import { getCurrentUser } from "@/utils/auth";
 
 export default async function PropertiesPage() {

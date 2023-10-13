@@ -5,8 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { MouseEvent, useCallback, useMemo } from "react";
 
-import Button from "@/components/Button";
-import HeartButton from "@/components/HeartButton";
+import Button from "@/components/button";
+import HeartButton from "@/components/heart-button";
 import useCountries from "@/hooks/useCountries";
 import { ListingCardProps as Props } from "@/types";
 import { formatToMoney } from "@/utils/helpers";

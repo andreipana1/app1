@@ -1,5 +1,5 @@
-import Button from "@/components/Button";
-import Calendar from "@/components/inputs/Calendar";
+import Button from "@/components/button";
+import Calendar from "@/components/inputs/calendar";
 import { ListingReservationProps as Props } from "@/types";
 import { formatToMoney } from "@/utils/helpers";
 

@@ -1,8 +1,8 @@
 import getReservations from "@/actions/getReservations";
-import Container from "@/components/Container";
-import EmptyState from "@/components/EmptyState";
-import Heading from "@/components/Heading";
-import TripContainer from "@/components/TripContainer";
+import Container from "@/components/container";
+import EmptyState from "@/components/empty-state";
+import Heading from "@/components/heading";
+import TripContainer from "@/components/trip-container";
 import { getCurrentUser } from "@/utils/auth";
 
 export default async function TripsPage() {

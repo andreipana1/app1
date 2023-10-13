@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import Heading from "@/components/Heading";
+import Heading from "@/components/heading";
 
 interface EmptyStateProps {
   title?: string;

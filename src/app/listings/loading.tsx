@@ -4,7 +4,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 import Skeleton from "react-loading-skeleton";
 
-import Container from "@/components/Container";
+import Container from "@/components/container";
 
 export default function Loading() {
   return (

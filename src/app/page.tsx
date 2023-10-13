@@ -1,7 +1,7 @@
 import getListings, { IListingsParams } from "@/actions/getListings";
-import Container from "@/components/Container";
-import EmptyState from "@/components/EmptyState";
-import ListingCard from "@/components/listings/ListingCard";
+import Container from "@/components/container";
+import EmptyState from "@/components/empty-state";
+import ListingCard from "@/components/listings/listing-card";
 import { getCurrentUser } from "@/utils/auth";
 
 export const dynamic = "force-dynamic";

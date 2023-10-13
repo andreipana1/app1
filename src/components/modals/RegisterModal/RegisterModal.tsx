@@ -5,7 +5,7 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
-import Modal from "@/components/modals/Modal";
+import Modal from "@/components/modals/modal";
 import RegisterBody from "@/components/modals/RegisterModal/RegisterBody";
 import RegisterFooter from "@/components/modals/RegisterModal/RegisterFooter";
 import useLoginModal from "@/hooks/useLoginModal";

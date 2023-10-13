@@ -1,7 +1,7 @@
 import React from "react";
 
-import Heading from "@/components/Heading";
-import Input from "@/components/inputs/Input";
+import Heading from "@/components/heading";
+import Input from "@/components/inputs/input";
 import { LoginBodyContentProps as Props } from "@/types";
 
 export default function LoginBodyContent({

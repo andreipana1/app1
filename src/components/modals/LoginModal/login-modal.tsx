@@ -6,9 +6,9 @@ import { signIn } from "next-auth/react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
-import LoginBodyContent from "@/components/modals/LoginModal/LoginBodyContent";
-import LoginFooter from "@/components/modals/LoginModal/LoginFooter";
-import Modal from "@/components/modals/Modal";
+import LoginBodyContent from "@/components/modals/LoginModal/login-body-content";
+import LoginFooter from "@/components/modals/LoginModal/login-footer";
+import Modal from "@/components/modals/modal";
 import useLoginModal from "@/hooks/useLoginModal";
 
 export default function LoginModal() {

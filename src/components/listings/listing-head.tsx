@@ -1,7 +1,7 @@
 import Image from "next/image";
 
-import Heading from "@/components/Heading";
-import HeartButton from "@/components/HeartButton";
+import Heading from "@/components/heading";
+import HeartButton from "@/components/heart-button";
 import useCountries from "@/hooks/useCountries";
 import { ListingHeadProps as Props } from "@/types";
 

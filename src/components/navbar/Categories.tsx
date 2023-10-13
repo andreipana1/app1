@@ -2,8 +2,8 @@
 
 import { usePathname, useSearchParams } from "next/navigation";
 
-import CategoryBox from "@/components/CategoryBox";
-import Container from "@/components/Container";
+import CategoryBox from "@/components/category-box";
+import Container from "@/components/container";
 import { categories } from "@/constants";
 
 export default function Categories() {

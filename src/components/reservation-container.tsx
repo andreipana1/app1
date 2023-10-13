@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 
-import ListingCard from "@/components/listings/ListingCard";
+import ListingCard from "@/components/listings/listing-card";
 import { SafeReservation, SessionInterface } from "@/types";
 
 interface Props {
@@ -14,7 +14,10 @@ interface Props {
   currentUser?: SessionInterface | null;
 }
 
-export default function TripContainer({ reservations, currentUser }: Props) {
+export default function ReservationContainer({
+  reservations,
+  currentUser,
+}: Props) {
   const router = useRouter();
   const [deletingId, setDeletingId] = useState("");
 

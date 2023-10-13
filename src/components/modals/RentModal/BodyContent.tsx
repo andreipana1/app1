@@ -1,7 +1,7 @@
 import React from "react";
 
-import Heading from "@/components/Heading";
-import CategoryInput from "@/components/inputs/CategoryInput";
+import Heading from "@/components/heading";
+import CategoryInput from "@/components/inputs/category-input";
 import { categories } from "@/constants";
 
 type Props = {

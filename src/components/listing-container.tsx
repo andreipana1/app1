@@ -9,10 +9,10 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { Range } from "react-date-range";
 import { toast } from "react-hot-toast";
 
-import Container from "@/components/Container";
-import ListingHead from "@/components/listings/ListingHead";
-import ListingInfo from "@/components/listings/ListingInfo";
-import ListingReservation from "@/components/listings/ListingReservation";
+import Container from "@/components/container";
+import ListingHead from "@/components/listings/listing-head";
+import ListingInfo from "@/components/listings/listing-info";
+import ListingReservation from "@/components/listings/listing-reservation";
 import { categories } from "@/constants";
 import useLoginModal from "@/hooks/useLoginModal";
 import { ListingClientProps as Props } from "@/types";
