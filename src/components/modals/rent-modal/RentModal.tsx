@@ -8,12 +8,12 @@ import { FieldValues, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
 import Modal from "@/components/modals/modal";
-import BodyContent from "@/components/modals/rent-modal/BodyContent";
-import StepDescription from "@/components/modals/rent-modal/StepDescription";
-import StepImages from "@/components/modals/rent-modal/StepImages";
-import StepInfo from "@/components/modals/rent-modal/StepInfo";
-import StepLocation from "@/components/modals/rent-modal/StepLocation";
-import StepPrice from "@/components/modals/rent-modal/StepPrice";
+import BodyContent from "@/components/modals/rent-modal/body-content";
+import StepDescription from "@/components/modals/rent-modal/step-description";
+import StepImages from "@/components/modals/rent-modal/step-images";
+import StepInfo from "@/components/modals/rent-modal/step-info";
+import StepLocation from "@/components/modals/rent-modal/step-location";
+import StepPrice from "@/components/modals/rent-modal/step-price";
 import useRentModal from "@/hooks/useRentModal";
 
 enum STEPS {

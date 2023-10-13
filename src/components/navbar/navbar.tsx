@@ -1,10 +1,10 @@
 import React from "react";
 
 import Container from "@/components/container";
-import Categories from "@/components/navbar/Categories";
-import Logo from "@/components/navbar/Logo";
-import Search from "@/components/navbar/Search";
-import UserMenu from "@/components/navbar/UserMenu";
+import Categories from "@/components/navbar/categories";
+import Logo from "@/components/navbar/logo";
+import Search from "@/components/navbar/search";
+import UserMenu from "@/components/navbar/user-menu";
 
 export default function Navbar() {
   return (
