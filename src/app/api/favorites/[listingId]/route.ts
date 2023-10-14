@@ -15,9 +15,7 @@ export async function POST(req: Request, { params }: IParams) {
   try {
     const currentUser = await getCurrentUser();
 
-    if (!currentUser) return res.error();
-
-    if (!listingId) {
+    if (!listingId || !currentUser) {
       return res.json({ message: "Not found" }, { status: 404 });
     }
 

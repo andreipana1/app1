@@ -12,9 +12,7 @@ interface IParams {
 export async function DELETE(req: Request, { params }: IParams) {
   const { listingId } = params;
 
-  if (!listingId || typeof listingId !== "string") {
-    throw new Error("Invalid ID");
-  }
+  if (!listingId) return res.error();
 
   try {
     const currentUser = await getCurrentUser();
