@@ -34,8 +34,8 @@ export default function ListingCard({
   );
 
   const price = useMemo(() => {
-    if (reservation) return reservation.totalPrice;
-    return data.price;
+    if (reservation) return formatToMoney(reservation.totalPrice);
+    return formatToMoney(data.price);
   }, [data.price, reservation]);
 
   const reservationDate = useMemo(() => {
@@ -73,7 +73,7 @@ export default function ListingCard({
           </p>
 
           <footer className="flex flex-row items-center gap-1">
-            <h3 className="font-semibold">{formatToMoney(price)}</h3>
+            <h3 className="font-semibold">{price}</h3>
             {!reservation && <p className="font-light">Night</p>}
           </footer>
 
