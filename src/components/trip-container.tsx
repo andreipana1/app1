@@ -1,12 +1,7 @@
 "use client";
 
-import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { toast } from "react-hot-toast";
-
 import ListingCard from "@/components/listings/listing-card";
+import { useReservation } from "@/hooks/useReservation";
 import { SafeReservation, SessionInterface } from "@/types";
 
 interface Props {
@@ -15,22 +10,7 @@ interface Props {
 }
 
 export default function TripContainer({ reservations, currentUser }: Props) {
-  const router = useRouter();
-  const [deletingId, setDeletingId] = useState("");
-
-  const { mutate } = useMutation({
-    mutationFn: (id: string) => {
-      setDeletingId(id);
-      return axios.delete(`/api/reservations/${id}`);
-    },
-    onSuccess: () => {
-      toast.success("Reservation cancelled");
-      router.refresh();
-    },
-    onError: () => {
-      toast.error("Something went wrong.");
-    },
-  });
+  const { mutate, deletingId } = useReservation();
 
   return (
     <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
