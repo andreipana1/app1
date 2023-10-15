@@ -6,10 +6,10 @@ import { useMemo } from "react";
 import { BiSearch } from "react-icons/bi";
 
 import useCountries from "@/hooks/useCountries";
-import useSearchModal from "@/hooks/useSearchModal";
+import { useModalStore } from "@/store";
 
 export default function Search() {
-  const searchModal = useSearchModal();
+  const { openSearch } = useModalStore();
   const searchParams = useSearchParams();
 
   const { getByValue } = useCountries();
@@ -42,7 +42,7 @@ export default function Search() {
 
   return (
     <button
-      onClick={searchModal.onOpen}
+      onClick={openSearch}
       className="border-[1px] w-full md:w-max justify-self-center py-2 rounded-full shadow-sm hover:shadow-md transition cursor-pointer"
     >
       <div className="flex flex-row items-center justify-between">

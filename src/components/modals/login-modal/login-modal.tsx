@@ -9,11 +9,11 @@ import { toast } from "react-hot-toast";
 import LoginBodyContent from "@/components/modals/login-modal/login-body-content";
 import LoginFooter from "@/components/modals/login-modal/login-footer";
 import Modal from "@/components/modals/modal";
-import useLoginModal from "@/hooks/useLoginModal";
+import { useModalStore } from "@/store";
 
 export default function LoginModal() {
   const router = useRouter();
-  const loginModal = useLoginModal();
+  const { closeLogin, isLoginOpen } = useModalStore();
 
   const {
     register,
@@ -40,17 +40,17 @@ export default function LoginModal() {
 
       toast.success("Logged in");
       router.refresh();
-      loginModal.onClose();
+      closeLogin();
     },
   });
 
   return (
     <Modal
       disabled={isLoading}
-      isOpen={loginModal.isOpen}
+      isOpen={isLoginOpen}
       title="Login"
       actionLabel="Continue"
-      onClose={loginModal.onClose}
+      onClose={closeLogin}
       // @ts-ignore
       onSubmit={handleSubmit(mutate)}
       body={

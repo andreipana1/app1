@@ -14,7 +14,8 @@ import ListingHead from "@/components/listings/listing-head";
 import ListingInfo from "@/components/listings/listing-info";
 import ListingReservation from "@/components/listings/listing-reservation";
 import { categories } from "@/constants";
-import useLoginModal from "@/hooks/useLoginModal";
+// import useLoginModal from "@/hooks/useLoginModal";
+import { useModalStore } from "@/store";
 import { ListingClientProps as Props } from "@/types";
 
 const initialDateRange = {
@@ -29,7 +30,8 @@ export default function ListingContainer({
   currentUser,
 }: Props) {
   const router = useRouter();
-  const loginModal = useLoginModal();
+  // const loginModal = useLoginModal();
+  const { openLogin } = useModalStore();
   const { status } = useSession();
 
   const [totalPrice, setTotalPrice] = useState(listing.price);
@@ -54,9 +56,9 @@ export default function ListingContainer({
   });
 
   const handleCreateReservation = useCallback(() => {
-    if (status === "unauthenticated") return loginModal.onOpen();
+    if (status === "unauthenticated") return openLogin();
     mutate();
-  }, [loginModal, mutate, status]);
+  }, [mutate, openLogin, status]);
 
   const disableDates = useMemo(() => {
     if (!reservations || reservations.length === 0) return [];

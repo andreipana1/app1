@@ -6,16 +6,11 @@ import { AiOutlineMenu } from "react-icons/ai";
 
 import Avatar from "@/components/avatar";
 import MenuItem from "@/components/navbar/menu-item";
-import useLoginModal from "@/hooks/useLoginModal";
-import useRegisterModal from "@/hooks/useRegisterModal";
-import useRentModal from "@/hooks/useRentModal";
+import { useModalStore } from "@/store";
 
 export default function UserMenu() {
   const { data, status } = useSession();
-
-  const loginModal = useLoginModal();
-  const registerModal = useRegisterModal();
-  const rentModal = useRentModal();
+  const { openLogin, openRent, openRegister } = useModalStore();
 
   const [isOpen, setIsOpen] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -25,9 +20,9 @@ export default function UserMenu() {
   }, []);
 
   const onRent = useCallback(() => {
-    if (status === "unauthenticated") return loginModal.onOpen();
-    return rentModal.onOpen();
-  }, [loginModal, rentModal, status]);
+    if (status === "unauthenticated") return openLogin();
+    return openRent();
+  }, [openLogin, openRent, status]);
 
   const closeModalRef = useCallback((event: any) => {
     if (modalRef.current?.contains(event.target as Node)) return;
@@ -71,7 +66,7 @@ export default function UserMenu() {
                 <MenuItem label="My reservations" url="/reservations" />
                 <MenuItem label="My properties" url="/properties" />
                 <button
-                  onClick={rentModal.onOpen}
+                  onClick={openRent}
                   className="px-4 py-3 hover:bg-neutral-100 transition font-semibold text-left"
                 >
                   Airbnb your home
@@ -86,13 +81,13 @@ export default function UserMenu() {
             ) : (
               <>
                 <button
-                  onClick={loginModal.onOpen}
+                  onClick={openLogin}
                   className="px-4 py-3 hover:bg-neutral-100 transition font-semibold text-left"
                 >
                   Login
                 </button>
                 <button
-                  onClick={registerModal.onOpen}
+                  onClick={openRegister}
                   className="px-4 py-3 hover:bg-neutral-100 transition font-semibold text-left"
                 >
                   Sign up

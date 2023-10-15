@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { MouseEvent, useCallback, useMemo } from "react";
 import { toast } from "react-hot-toast";
 
-import useLoginModal from "@/hooks/useLoginModal";
+import { useModalStore } from "@/store";
 import { SessionInterface } from "@/types";
 
 interface IUseFavorite {
@@ -15,7 +15,7 @@ interface IUseFavorite {
 
 export default function useFavorite({ listingId, currentUser }: IUseFavorite) {
   const router = useRouter();
-  let loginModal = useLoginModal();
+  const { openLogin } = useModalStore();
   const { status } = useSession();
 
   const hasFavorite = useMemo(() => {
@@ -46,10 +46,10 @@ export default function useFavorite({ listingId, currentUser }: IUseFavorite) {
   const toggleFavorite = useCallback(
     (event: MouseEvent<HTMLDivElement>) => {
       event.stopPropagation();
-      if (status === "unauthenticated") return loginModal.onOpen();
+      if (status === "unauthenticated") return openLogin();
       mutate();
     },
-    [loginModal, mutate, status],
+    [mutate, openLogin, status],
   );
 
   return {

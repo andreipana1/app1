@@ -5,17 +5,15 @@ import { useCallback } from "react";
 import { FcGoogle } from "react-icons/fc";
 
 import Button from "@/components/button";
-import useLoginModal from "@/hooks/useLoginModal";
-import useRegisterModal from "@/hooks/useRegisterModal";
+import { useModalStore } from "@/store";
 
 export default function RegisterFooter() {
-  const registerModal = useRegisterModal();
-  const loginModal = useLoginModal();
+  const { closeRegister, openLogin } = useModalStore();
 
   const onToggle = useCallback(() => {
-    registerModal.onClose();
-    loginModal.onOpen();
-  }, [loginModal, registerModal]);
+    closeRegister();
+    openLogin();
+  }, [closeRegister, openLogin]);
 
   return (
     <div className="flex flex-col gap-4 mt-3">

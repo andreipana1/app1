@@ -8,12 +8,11 @@ import { toast } from "react-hot-toast";
 import Modal from "@/components/modals/modal";
 import RegisterBody from "@/components/modals/register-modal/register-body";
 import RegisterFooter from "@/components/modals/register-modal/register-footer";
-import useLoginModal from "@/hooks/useLoginModal";
-import useRegisterModal from "@/hooks/useRegisterModal";
+import { useModalStore } from "@/store";
 
 export default function RegisterModal() {
-  const registerModal = useRegisterModal();
-  const loginModal = useLoginModal();
+  const { openLogin, closeRegister, isRegisterOpen } = useModalStore();
+
   const {
     register,
     handleSubmit,
@@ -30,8 +29,8 @@ export default function RegisterModal() {
     mutationFn: async (data) => axios.post("/api/register", data),
     onSuccess: () => {
       toast.success("Registered!");
-      registerModal.onClose();
-      loginModal.onOpen();
+      closeRegister();
+      openLogin();
     },
     onError: () => {
       toast.error("Error Register");
@@ -41,8 +40,8 @@ export default function RegisterModal() {
   return (
     <Modal
       disabled={isLoading}
-      isOpen={registerModal.isOpen}
-      onClose={registerModal.onClose}
+      isOpen={isRegisterOpen}
+      onClose={closeRegister}
       // @ts-ignore
       onSubmit={handleSubmit(mutate)}
       actionLabel="Continue"

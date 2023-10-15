@@ -14,7 +14,7 @@ import StepImages from "@/components/modals/rent-modal/step-images";
 import StepInfo from "@/components/modals/rent-modal/step-info";
 import StepLocation from "@/components/modals/rent-modal/step-location";
 import StepPrice from "@/components/modals/rent-modal/step-price";
-import useRentModal from "@/hooks/useRentModal";
+import { useModalStore } from "@/store";
 
 enum STEPS {
   CATEGORY = 0,
@@ -35,10 +35,11 @@ const uploadImage = async (imagePath: string) => {
 };
 
 export default function RentModal() {
+  const router = useRouter();
+  const { closeRent, isRentOpen } = useModalStore();
+
   const [step, setStep] = useState(STEPS.CATEGORY);
 
-  const router = useRouter();
-  const rentModal = useRentModal();
   const {
     register,
     handleSubmit,
@@ -103,7 +104,7 @@ export default function RentModal() {
       router.refresh();
       reset();
       setStep(STEPS.CATEGORY);
-      rentModal.onClose();
+      closeRent();
     },
     onError: () => {
       toast.error("Error creating Product");
@@ -181,13 +182,13 @@ export default function RentModal() {
   return (
     <Modal
       disabled={loading}
-      isOpen={rentModal.isOpen}
+      isOpen={isRentOpen}
       title="Airbnb your home!"
       actionLabel={actionLabel}
       onSubmit={handleSubmit(handleNewItem)}
       secondaryActionLabel={secondaryActionLabel}
       secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
-      onClose={rentModal.onClose}
+      onClose={closeRent}
       body={ChangeSection}
     />
   );

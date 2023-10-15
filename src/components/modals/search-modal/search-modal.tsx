@@ -10,7 +10,7 @@ import Modal from "@/components/modals/modal";
 import BodyContent from "@/components/modals/search-modal/body-content";
 import SearchStepDate from "@/components/modals/search-modal/search-step-date";
 import SearchStepInfo from "@/components/modals/search-modal/search-step-info";
-import useSearchModal from "@/hooks/useSearchModal";
+import { useModalStore } from "@/store";
 import { CountrySelectValue } from "@/types";
 
 enum STEPS {
@@ -21,8 +21,8 @@ enum STEPS {
 
 export default function SearchModal() {
   const router = useRouter();
-  const searchModal = useSearchModal();
   const searchParams = useSearchParams();
+  const { closeSearch, isSearchOpen } = useModalStore();
 
   const [step, setStep] = useState(STEPS.LOCATION);
 
@@ -80,20 +80,20 @@ export default function SearchModal() {
     );
 
     setStep(STEPS.LOCATION);
-    searchModal.onClose();
+    closeSearch();
     router.push(url);
   }, [
     step,
-    searchModal,
-    router,
-    guestCount,
-    roomCount,
-    onNext,
-    bathroomCount,
     searchParams,
     location?.value,
+    guestCount,
+    roomCount,
+    bathroomCount,
     dateRange.startDate,
     dateRange.endDate,
+    closeSearch,
+    router,
+    onNext,
   ]);
 
   const actionLabel = useMemo(() => {
@@ -136,13 +136,13 @@ export default function SearchModal() {
 
   return (
     <Modal
-      isOpen={searchModal.isOpen}
+      isOpen={isSearchOpen}
       title="Filters"
       actionLabel={actionLabel}
       onSubmit={onSubmit}
       secondaryActionLabel={secondaryActionLabel}
       secondaryAction={step === STEPS.LOCATION ? undefined : onBack}
-      onClose={searchModal.onClose}
+      onClose={closeSearch}
       body={ChangeSection}
     />
   );
