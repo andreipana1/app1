@@ -1,10 +1,26 @@
-import { NextResponse as res } from "next/server";
+import { NextRequest, NextResponse as res } from "next/server";
+import * as z from "zod";
 
 import { getCurrentUser } from "@/utils/auth";
 import prisma from "@/utils/connect";
 
-export async function POST(req: Request) {
+const postSchema = z.object({
+  title: z.string().min(3),
+  description: z.string().min(3),
+  category: z.string(),
+  imageSrc: z.string(),
+  roomCount: z.number(),
+  bathroomCount: z.number(),
+  guestCount: z.number(),
+  price: z.string(),
+  location: z.object({
+    value: z.string(),
+  }),
+});
+
+export async function POST(req: NextRequest) {
   const body = await req.json();
+
   const {
     title,
     description,
@@ -15,16 +31,13 @@ export async function POST(req: Request) {
     guestCount,
     location,
     price,
-  } = body;
+  } = postSchema.parse(body);
 
   try {
     const currentUser = await getCurrentUser();
 
-    if (!currentUser) return res.error();
-
-    Object.keys(body).forEach((value) => {
-      if (!body[value]) res.error();
-    });
+    if (!currentUser)
+      return res.json({ message: "Unauthorized" }, { status: 401 });
 
     const listing = await prisma.listing.create({
       data: {
@@ -43,6 +56,6 @@ export async function POST(req: Request) {
 
     return res.json(listing, { status: 200 });
   } catch (error) {
-    return res.error();
+    return res.json({ message: "Error Creating new Rent!" }, { status: 500 });
   }
 }

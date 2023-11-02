@@ -1,6 +1,8 @@
 import { v2 as cloudinary } from "cloudinary";
 import { NextRequest, NextResponse as res } from "next/server";
 
+import { getCurrentUser } from "@/utils/auth";
+
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
   api_key: process.env.CLOUDINARY_KEY,
@@ -8,7 +10,11 @@ cloudinary.config({
 });
 
 export async function POST(req: NextRequest) {
+  const currentUser = await getCurrentUser();
   const { path } = await req.json();
+
+  if (!currentUser)
+    return res.json({ message: "Unauthorized" }, { status: 401 });
 
   if (!path) {
     return res.json({ message: "not found" }, { status: 404 });

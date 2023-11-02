@@ -14,7 +14,6 @@ import ListingHead from "@/components/listings/listing-head";
 import ListingInfo from "@/components/listings/listing-info";
 import ListingReservation from "@/components/listings/listing-reservation";
 import { categories } from "@/constants";
-// import useLoginModal from "@/hooks/useLoginModal";
 import { useModalStore } from "@/store";
 import { ListingClientProps as Props } from "@/types";
 
@@ -30,7 +29,6 @@ export default function ListingContainer({
   currentUser,
 }: Props) {
   const router = useRouter();
-  // const loginModal = useLoginModal();
   const { openLogin } = useModalStore();
   const { status } = useSession();
 
