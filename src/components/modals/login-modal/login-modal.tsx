@@ -33,7 +33,7 @@ export default function LoginModal() {
         redirect: false,
       });
     },
-    onSuccess: (data, variables, context) => {
+    onSuccess: (data) => {
       if (data?.error) {
         toast.error("Error trying to login");
         return;
