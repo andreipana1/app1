@@ -3,7 +3,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
 import LoginBodyContent from "@/components/modals/login-modal/login-body-content";
@@ -27,13 +27,14 @@ export default function LoginModal() {
   });
 
   const { mutate, isLoading } = useMutation({
-    mutationFn: async (data: SubmitHandler<FieldValues>) => {
-      const response = await signIn("credentials", {
+    mutationFn: async (data: FieldValues) => {
+      return await signIn("credentials", {
         ...data,
         redirect: false,
       });
-
-      if (response?.error) {
+    },
+    onSuccess: (data, variables, context) => {
+      if (data?.error) {
         toast.error("Error trying to login");
         return;
       }
@@ -51,8 +52,7 @@ export default function LoginModal() {
       title="Login"
       actionLabel="Continue"
       onClose={closeLogin}
-      // @ts-ignore
-      onSubmit={handleSubmit(mutate)}
+      onSubmit={handleSubmit((data) => mutate(data))}
       body={
         <LoginBodyContent
           errors={errors}

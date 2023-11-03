@@ -1,5 +1,6 @@
 import { v2 as cloudinary } from "cloudinary";
 import { NextRequest, NextResponse as res } from "next/server";
+import * as z from "zod";
 
 import { getCurrentUser } from "@/utils/auth";
 
@@ -9,16 +10,17 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_SECRET,
 });
 
+const postSchema = z.object({
+  path: z.string(),
+});
+
 export async function POST(req: NextRequest) {
   const currentUser = await getCurrentUser();
-  const { path } = await req.json();
+  const body = await req.json();
+  const { path } = postSchema.parse(body);
 
   if (!currentUser)
     return res.json({ message: "Unauthorized" }, { status: 401 });
-
-  if (!path) {
-    return res.json({ message: "not found" }, { status: 404 });
-  }
 
   try {
     const options = {
