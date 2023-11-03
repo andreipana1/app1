@@ -21,17 +21,7 @@ const postSchema = z.object({
 export async function POST(req: NextRequest) {
   const body = await req.json();
 
-  const {
-    title,
-    description,
-    imageSrc,
-    category,
-    roomCount,
-    bathroomCount,
-    guestCount,
-    location,
-    price,
-  } = postSchema.parse(body);
+  const { location, price, ...rest } = postSchema.parse(body);
 
   try {
     const currentUser = await getCurrentUser();
@@ -41,13 +31,7 @@ export async function POST(req: NextRequest) {
 
     const listing = await prisma.listing.create({
       data: {
-        title,
-        description,
-        imageSrc,
-        category,
-        roomCount,
-        bathroomCount,
-        guestCount,
+        ...rest,
         locationValue: location.value,
         price: parseInt(price, 10),
         userId: currentUser.user.id,

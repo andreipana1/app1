@@ -1,4 +1,5 @@
 import { NextResponse as res } from "next/server";
+import * as z from "zod";
 
 import { getCurrentUser } from "@/utils/auth";
 import prisma from "@/utils/connect";
@@ -9,27 +10,26 @@ interface IParams {
   };
 }
 
+const postSchema = z.object({
+  listingId: z.string().min(1),
+});
+
 export async function POST(req: Request, { params }: IParams) {
-  const { listingId } = params;
+  const { listingId } = postSchema.parse(params);
 
   try {
     const currentUser = await getCurrentUser();
 
-    if (!listingId || !currentUser) {
-      return res.json({ message: "Not found" }, { status: 404 });
-    }
+    if (!currentUser)
+      return res.json({ message: "Unauthorized" }, { status: 401 });
 
     let favoriteIds = [...(currentUser.user.favoriteIds || [])];
 
     favoriteIds.push(listingId);
 
     const user = await prisma.user.update({
-      where: {
-        id: currentUser.user.id,
-      },
-      data: {
-        favoriteIds,
-      },
+      where: { id: currentUser.user.id },
+      data: { favoriteIds },
     });
 
     return res.json(user, { status: 200 });
@@ -40,28 +40,21 @@ export async function POST(req: Request, { params }: IParams) {
 }
 
 export async function DELETE(req: Request, { params }: IParams) {
-  const { listingId } = params;
+  const { listingId } = postSchema.parse(params);
 
   try {
     const currentUser = await getCurrentUser();
 
-    if (!currentUser) return res.error();
-
-    if (!listingId) {
-      return res.json({ message: "Not found" }, { status: 404 });
-    }
+    if (!currentUser)
+      return res.json({ message: "Unauthorized" }, { status: 401 });
 
     let favoriteIds = [...(currentUser.user.favoriteIds || [])];
 
     favoriteIds = favoriteIds.filter((id) => id !== listingId);
 
     const user = await prisma.user.update({
-      where: {
-        id: currentUser.user.id,
-      },
-      data: {
-        favoriteIds,
-      },
+      where: { id: currentUser.user.id },
+      data: { favoriteIds },
     });
 
     return res.json(user, { status: 200 });

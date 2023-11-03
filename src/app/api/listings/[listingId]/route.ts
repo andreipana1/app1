@@ -1,4 +1,5 @@
 import { NextResponse as res } from "next/server";
+import * as z from "zod";
 
 import { getCurrentUser } from "@/utils/auth";
 import prisma from "@/utils/connect";
@@ -9,15 +10,18 @@ interface IParams {
   };
 }
 
-export async function DELETE(req: Request, { params }: IParams) {
-  const { listingId } = params;
+const deleteSchema = z.object({
+  listingId: z.string().min(1),
+});
 
-  if (!listingId) return res.error();
+export async function DELETE(req: Request, { params }: IParams) {
+  const { listingId } = deleteSchema.parse(params);
 
   try {
     const currentUser = await getCurrentUser();
 
-    if (!currentUser) return res.error();
+    if (!currentUser)
+      return res.json({ message: "Unauthorized" }, { status: 401 });
 
     const listing = await prisma.listing.deleteMany({
       where: {
