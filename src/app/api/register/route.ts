@@ -6,15 +6,21 @@ import prisma from "@/utils/connect";
 
 const userSchema = z.object({
   email: z.string().email(),
-  name: z.string().min(4),
-  password: z.string().min(1),
+  name: z.string().min(4).max(12),
+  password: z.string().min(4).max(12),
 });
 
 export async function POST(req: Request) {
   const body = await req.json();
-  const { email, name, password } = userSchema.parse(body);
+  const response = userSchema.safeParse(body);
+
+  if (!response.success) {
+    const { errors } = response.error;
+    return res.json({ message: "Invalid request", errors }, { status: 400 });
+  }
 
   try {
+    const { email, name, password } = response.data;
     const hashedPassword = await bcrypt.hash(password, 12);
 
     const user = await prisma.user.create({
@@ -27,6 +33,6 @@ export async function POST(req: Request) {
 
     return res.json(user, { status: 200 });
   } catch (error) {
-    return res.error();
+    return res.json({ message: "Server Error!", error }, { status: 500 });
   }
 }
