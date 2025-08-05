@@ -55,13 +55,6 @@ export const authOptions: NextAuthOptions = {
           },
         });
 
-        const favorites = await prisma.listing.findMany({
-          where: {
-            id: {
-              in: [...(currentUser?.favoriteIds || [])],
-            },
-          },
-        });
 
         if (!currentUser) return session;
 
@@ -70,10 +63,6 @@ export const authOptions: NextAuthOptions = {
           user: {
             ...session.user,
             ...currentUser,
-            favorites: favorites.map((favorite) => ({
-              ...favorite,
-              createdAt: favorite.createdAt.toString(),
-            })),
             createdAt: currentUser.createdAt.toISOString(),
             updatedAt: currentUser.updatedAt.toISOString(),
             emailVerified: currentUser.emailVerified?.toISOString() || null,

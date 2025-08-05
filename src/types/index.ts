@@ -31,7 +31,6 @@ export type SafeUser = Omit<
   updatedAt: string;
   emailVerified: string | null;
   favoriteIds?: string[];
-  favorites?: Favorite[];
 };
 
 export type SafeListing = Omit<Listing, "createdAt"> & {
