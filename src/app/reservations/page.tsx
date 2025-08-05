@@ -7,10 +7,11 @@ import { getCurrentUser } from "@/utils/auth";
 
 export default async function ReservationPage() {
   const currentUser = await getCurrentUser();
-  const reservations = await getReservations({ authorId: currentUser.user.id });
 
   if (!currentUser)
     return <EmptyState title="Unauthorized" subtitle="Please login" />;
+
+  const reservations = await getReservations({ authorId: currentUser.user.id });
 
   if (!reservations.length)
     return (

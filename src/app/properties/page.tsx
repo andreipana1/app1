@@ -7,10 +7,11 @@ import { getCurrentUser } from "@/utils/auth";
 
 export default async function PropertiesPage() {
   const currentUser = await getCurrentUser();
-  const listings = await getListings({ userId: currentUser.user.id });
 
   if (!currentUser)
     return <EmptyState title="Unauthorized" subtitle="Please login" />;
+
+  const listings = await getListings({ userId: currentUser.user.id });
 
   if (!listings.length)
     return (
@@ -23,7 +24,7 @@ export default async function PropertiesPage() {
   return (
     <Container>
       <Heading title="Properties" subtitle="List of your properties" />
-      <PropertiesContainer listings={listings} currentUser={currentUser} />;
+      <PropertiesContainer listings={listings} currentUser={currentUser} />
     </Container>
   );
 }
