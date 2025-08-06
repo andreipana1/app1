@@ -5,13 +5,14 @@ import ListingContainer from "@/components/listing-container";
 import { getCurrentUser } from "@/utils/auth";
 
 type Props = {
-  params: {
-    listingId?: string;
-  };
+  params: Promise<{
+    listingId: string;
+  }>;
 };
 export default async function ListingsPage({ params }: Props) {
-  const listing = await getListingById(params);
-  const reservations = await getReservations(params);
+  const resolvedParams = await params;
+  const listing = await getListingById({ listingId: resolvedParams.listingId });
+  const reservations = await getReservations({ listingId: resolvedParams.listingId });
   const currentUser = await getCurrentUser();
 
   if (!listing) return <EmptyState />;
