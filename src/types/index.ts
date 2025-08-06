@@ -1,5 +1,4 @@
-import { Listing, Reservation } from "@prisma/client";
-import { Session, User } from "next-auth";
+import { Session, User as NextAuthUser } from "next-auth";
 import React, {
   ButtonHTMLAttributes,
   ComponentPropsWithoutRef,
@@ -9,12 +8,50 @@ import { Range } from "react-date-range";
 import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 import { IconType } from "react-icons";
 
+// Local type definitions to replace Prisma types
+export interface User {
+  id: string;
+  email: string;
+  name: string;
+  hashedPassword?: string;
+  createdAt: Date;
+  updatedAt: Date;
+  emailVerified?: Date | null;
+  favoriteIds?: string[];
+  isAdmin?: boolean;
+}
+
+export interface Listing {
+  id: string;
+  title: string;
+  description: string;
+  imageSrc: string;
+  createdAt: Date;
+  category: string;
+  roomCount: number;
+  bathroomCount: number;
+  guestCount: number;
+  locationValue: string;
+  userId: string;
+  price: number;
+}
+
+export interface Reservation {
+  id: string;
+  userId: string;
+  listingId: string;
+  startDate: Date;
+  endDate: Date;
+  totalPrice: number;
+  createdAt: Date;
+}
+
 export interface Props {
   children: ReactNode;
 }
 
 export interface SessionInterface extends Session {
-  user: User &
+  user: NextAuthUser &
     SafeUser & {
       name: string;
       email: string;

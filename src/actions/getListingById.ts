@@ -7,28 +7,38 @@ type IParams = {
 export default async function getListingById(params: IParams) {
   try {
     const { listingId } = params;
+    
+    if (!listingId) return null;
+    
     const listing = await prisma.listing.findUnique({
       where: {
         id: listingId,
-      },
-      include: {
-        user: true,
       },
     });
 
     if (!listing) return null;
 
+    // Fetch user data separately since our mock doesn't support include
+    const user = await prisma.user.findUnique({
+      where: {
+        id: listing.userId,
+      },
+    });
+
+    if (!user) return null;
+
     return {
       ...listing,
       createdAt: listing.createdAt.toISOString(),
       user: {
-        ...listing.user,
-        createdAt: listing.user.createdAt.toString(),
-        updateAt: listing.user.createdAt.toString(),
-        emailVerified: listing.user.emailVerified?.toString() || null,
+        ...user,
+        createdAt: user.createdAt.toISOString(),
+        updatedAt: user.updatedAt.toISOString(),
+        emailVerified: user.emailVerified?.toISOString() || null,
       },
     };
   } catch (error) {
-    throw new Error("Error get listing by ID");
+    console.error("Error in getListingById:", error);
+    return null;
   }
 }

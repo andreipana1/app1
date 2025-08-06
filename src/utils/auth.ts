@@ -1,5 +1,4 @@
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import bcrypt from "bcrypt";
+import bcryptjs from "bcryptjs";
 import { getServerSession, NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
@@ -8,7 +7,6 @@ import { SessionInterface } from "@/types";
 import prisma from "@/utils/connect";
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -35,7 +33,7 @@ export const authOptions: NextAuthOptions = {
           return null;
         }
 
-        const passwordsMatch = await bcrypt.compare(
+        const passwordsMatch = await bcryptjs.compare(
           credentials.password,
           user?.hashedPassword,
         );
