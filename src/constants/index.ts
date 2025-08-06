@@ -11,10 +11,15 @@ import {
   GiWindmill,
 } from "react-icons/gi";
 import { IoDiamond } from "react-icons/io5";
-import { MdOutlineVilla } from "react-icons/md";
+import { MdOutlineVilla, MdPets } from "react-icons/md";
 import { TbBeach, TbMountain, TbPool } from "react-icons/tb";
 
 export const categories = [
+  {
+    label: "Pet-Friendly",
+    icon: MdPets,
+    description: "Perfect for travelers with pets!",
+  },
   {
     label: "Beach",
     icon: TbBeach,

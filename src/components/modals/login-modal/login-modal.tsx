@@ -26,7 +26,7 @@ export default function LoginModal() {
     },
   });
 
-  const { mutate, isLoading } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: async (data: FieldValues) => {
       return await signIn("credentials", {
         ...data,
@@ -47,18 +47,18 @@ export default function LoginModal() {
 
   return (
     <Modal
-      disabled={isLoading}
+      disabled={isPending}
       isOpen={isLoginOpen}
       title="Login"
       actionLabel="Continue"
       onClose={closeLogin}
       onSubmit={handleSubmit((data) => mutate(data))}
       body={
-        <LoginBodyContent
-          errors={errors}
-          register={register}
-          isLoading={isLoading}
-        />
+                  <LoginBodyContent
+            errors={errors}
+            register={register}
+            isPending={isPending}
+          />
       }
       footer={<LoginFooter />}
     />

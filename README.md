@@ -1,164 +1,233 @@
-# Next.js Fullstack Airbnb Clone
+# RuralHOP - Pet-Friendly Rural Romania Rental Platform 🐾🏡
 
-A modern, full-featured Airbnb clone built with Next.js 13, React, Prisma, MongoDB, NextAuth, and Tailwind CSS. This application provides a complete property rental platform with features for both hosts and guests.
+> **Successfully upgraded to August 2025 compatibility!** ✅
 
-## Features
+RuralHOP is a Next.js 15 pet-friendly rental platform designed specifically for rural Romania. Built as an enhanced Airbnb clone with specialized features for pet owners and rural accommodation seekers.
 
-- 🔐 **Authentication**: Email/password and social login (Google) using NextAuth
-- 🏠 **Property Listings**: Create, browse, and search for properties
-- 🔍 **Advanced Filtering**: Filter properties by category, date range, location, and more
-- 📅 **Reservation System**: Book properties with date selection
-- 💰 **Pricing Calculation**: Automatic price calculation based on duration
-- 📍 **Map Integration**: Interactive maps for property locations using Leaflet
-- 📱 **Responsive Design**: Fully responsive UI for all devices
-- 🖼️ **Image Upload**: Cloudinary integration for property images
-- ❤️ **Favorites System**: Save and manage favorite properties
-- 👤 **User Profiles**: Manage your properties, trips, and reservations
-- 🔄 **Real-time Updates**: Instant UI updates using React Query
+## 🎉 August 2025 Upgrade Complete
 
-## Tech Stack
+This project has been successfully upgraded to meet August 2025 compatibility requirements:
 
-### Frontend
-- **Next.js 13** (App Router): React framework
-- **React 18**: UI library
-- **TailwindCSS**: Utility-first CSS framework
-- **React Hook Form**: Form validation
-- **React Query**: Data fetching and caching
-- **Zustand**: State management
-- **React Leaflet**: Maps integration
-- **React Date Range**: Date picker for reservations
+- ✅ **Next.js 15.4.5** with App Router
+- ✅ **React 19.1.1** with Server Components
+- ✅ **NextAuth v5 Beta** (5.0.0-beta.29) authentication
+- ✅ **MongoDB Atlas 2025** compatibility
+- ✅ **React Query v5** for state management
+- ✅ **Enhanced pet-friendly features**
 
-### Backend
-- **Next.js API Routes**: Backend API
-- **Prisma**: ORM for database operations
-- **MongoDB**: Database
-- **NextAuth.js**: Authentication
-- **Cloudinary**: Image hosting and management
+## 🐾 Pet-Friendly Features
 
-## Prerequisites
+### Custom Components
+- **PetBadge**: Display pet-friendly status with amenities
+- **RuralFilters**: Advanced filtering for pet accommodations
+- **Pet Categories**: Dedicated pet-friendly property categories
 
-Before you begin, ensure you have the following installed:
-- Node.js (v16 or later)
-- npm or yarn
-- MongoDB database (local or Atlas)
+### Database Schema
+Enhanced with pet-specific fields:
+- `petsAllowed` - Boolean flag for pet-friendly properties
+- `petFee` - Optional pet accommodation fee
+- `maxPets` - Maximum number of pets allowed
+- `petAmenities` - Array of pet amenities (dog parks, pet beds, etc.)
+- `isPetOwner` - User role flag for pet owners
+
+## 🏗️ Tech Stack
+
+### Core Framework
+- **Next.js 15.4.5** - React framework with App Router
+- **React 19.1.1** - UI library with Server Components
+- **TypeScript 5.9.2** - Type safety
+- **TailwindCSS 3.4.0** - Styling
+
+### Authentication & Security
+- **NextAuth v5 Beta** - Authentication (Google OAuth + Credentials)
+- **@auth/prisma-adapter** - Database session management
+- **bcryptjs** - Password hashing
+
+### Database & Storage
+- **Prisma 5.8.0** - ORM with MongoDB
+- **MongoDB 6.3.0** - Database (Atlas 2025 compatible)
+- **Cloudinary 2.7.0** - Image storage and processing
+
+### State Management & Forms
+- **React Query v5** - Server state management
+- **Zustand 5.0.7** - Client state management
+- **React Hook Form 7.62.0** - Form handling
+- **Zod 4.0.15** - Schema validation
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 20.0.0 or higher
+- MongoDB Atlas account (2025 compatible)
 - Cloudinary account
-- Google OAuth credentials (for social login)
+- Google OAuth credentials (optional)
 
-## Environment Setup
+### Installation
 
-1. Clone the repository
-2. Copy the `.env.example` file to `.env` and fill in the required values:
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd ruralhop
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install --legacy-peer-deps
+   ```
+
+3. **Set up environment variables**
+   Create a `.env.local` file:
+   ```env
+   # Database
+   DATABASE_URL="mongodb+srv://..."
+   DIRECT_URL="mongodb+srv://..."
+   
+   # NextAuth
+   NEXTAUTH_SECRET="your-secret-key"
+   NEXTAUTH_URL="http://localhost:3000"
+   
+   # Google OAuth (optional)
+   GOOGLE_CLIENT_ID="your-google-client-id"
+   GOOGLE_CLIENT_SECRET="your-google-client-secret"
+   
+   # Cloudinary
+   CLOUDINARY_CLOUD_NAME="your-cloud-name"
+   CLOUDINARY_API_KEY="your-api-key"
+   CLOUDINARY_API_SECRET="your-api-secret"
+   ```
+
+4. **Generate Prisma client**
+   ```bash
+   npx prisma generate
+   # Or use the rural-specific schema:
+   npx prisma generate --schema=./prisma/schema.ruralhop.prisma
+   ```
+
+5. **Run the development server**
+   ```bash
+   npm run dev
+   ```
+
+6. **Build for production**
+   ```bash
+   npm run build
+   npm start
+   ```
+
+## 📁 Project Structure
 
 ```
+src/
+├── app/                    # Next.js App Router
+│   ├── api/               # API routes
+│   │   ├── auth/          # NextAuth routes
+│   │   ├── listings/      # Property management
+│   │   └── reservations/  # Booking management
+│   ├── favorites/         # User favorites
+│   ├── listings/          # Property details
+│   └── page.tsx          # Home page
+├── components/            # React components
+│   ├── modals/           # Modal components
+│   ├── inputs/           # Form inputs
+│   ├── pet-badge.tsx     # Pet-friendly indicator
+│   └── rural-filters.tsx # Rural/pet filtering
+├── hooks/                # Custom React hooks
+├── utils/                # Utility functions
+│   └── auth.ts          # NextAuth configuration
+├── store/               # Zustand stores
+└── types/               # TypeScript types
+
+prisma/
+├── schema.prisma         # Main database schema
+└── schema.ruralhop.prisma # Rural-specific schema
+```
+
+## 🔧 Development
+
+### Key Commands
+```bash
+# Development
+npm run dev              # Start development server
+npm run build           # Build for production
+npm run lint            # Run ESLint
+
 # Database
-DATABASE_URL=mongodb+srv://username:password@cluster.mongodb.net/airbnb
-DIRECT_URL=mongodb+srv://username:password@cluster.mongodb.net/airbnb
+npx prisma generate     # Generate Prisma client
+npx prisma db push      # Push schema changes
+npx prisma studio       # Open Prisma Studio
 
-# NextAuth
-NEXTAUTH_SECRET=your_nextauth_secret
-NEXTAUTH_URL=http://localhost:3000
-
-# Google OAuth
-GOOGLE_CLIENT_ID=your_google_client_id
-GOOGLE_CLIENT_SECRET=your_google_client_secret
-
-# Cloudinary
-CLOUDINARY_NAME=your_cloudinary_name
-CLOUDINARY_KEY=your_cloudinary_key
-CLOUDINARY_SECRET=your_cloudinary_secret
+# Pet-friendly schema
+npx prisma generate --schema=./prisma/schema.ruralhop.prisma
 ```
 
-## Installation and Running
+### Available Scripts
+- `npm run dev` - Start development server with Prisma generation
+- `npm run build` - Build production bundle with Prisma generation
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint checks
 
-1. Install dependencies:
-```bash
-npm install
-# or
-yarn install
-```
+## 🐾 Pet-Friendly Usage
 
-2. Generate Prisma client:
-```bash
-npx prisma generate
-```
+### For Property Owners
+1. **List your property** with pet-friendly options
+2. **Set pet fees** and maximum pet limits
+3. **Add pet amenities** (dog parks, pet beds, fenced yards)
+4. **Manage reservations** with pet information
 
-3. Push the database schema to your MongoDB instance:
-```bash
-npx prisma db push
-```
+### For Pet Owners
+1. **Filter properties** by pet-friendly status
+2. **View pet amenities** and restrictions
+3. **Book accommodations** with pet details
+4. **Access rural filters** for ideal pet destinations
 
-4. Run the development server:
-```bash
-npm run dev
-# or
-yarn dev
-```
+### Pet-Friendly Categories
+- 🐾 **Pet-Friendly** - Properties that welcome pets
+- 🏚️ **Barns** - Rural barn accommodations
+- 🏔️ **Countryside** - Mountain and rural locations
+- 🏕️ **Camping** - Pet-friendly camping experiences
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+## 📚 Migration Documentation
 
-## Project Structure
+For detailed information about the August 2025 upgrade:
+- 📖 **[Migration Guide](RURALHOP_MIGRATION_GUIDE.md)** - Complete upgrade documentation
+- 🐛 **[Error Log](RURALHOP_ERROR_LOG.md)** - Issues encountered and solutions
 
-```
-next-fullstack-airbnb/
-├── prisma/                # Prisma schema and migrations
-├── public/                # Static assets
-├── src/
-│   ├── actions/           # Server actions for data operations
-│   ├── app/               # Next.js App Router
-│   │   ├── api/           # API routes
-│   │   ├── favorites/     # Favorites page
-│   │   ├── listings/      # Listings pages
-│   │   ├── properties/    # User properties management
-│   │   ├── reservations/  # Reservations management
-│   │   └── trips/         # User trips
-│   ├── components/        # React components
-│   │   ├── inputs/        # Form inputs
-│   │   ├── listings/      # Listing components
-│   │   ├── modals/        # Modal dialogs
-│   │   └── navbar/        # Navigation components
-│   ├── constants/         # Application constants
-│   ├── hooks/             # Custom React hooks
-│   ├── providers/         # Context providers
-│   ├── store/             # State management (Zustand)
-│   ├── types/             # TypeScript types
-│   └── utils/             # Utility functions
-├── .env                   # Environment variables
-├── next.config.js         # Next.js configuration
-├── package.json           # Project dependencies
-├── tailwind.config.ts     # Tailwind CSS configuration
-└── tsconfig.json          # TypeScript configuration
-```
+## 🛡️ Security & Compatibility
 
-## Deployment
+### NextAuth v5 Security Features
+- Enhanced JWT token handling
+- Improved session management
+- Google OAuth + credential authentication
+- MongoDB session storage
 
-This application can be deployed on Vercel, the platform from the creators of Next.js:
+### Database Compatibility
+- MongoDB Atlas 2025 ready
+- Prisma 5.x optimized queries
+- Enhanced pet-related data models
+- TypeScript strict mode compliance
 
-1. Push your code to a GitHub repository
-2. Import the project in Vercel
-3. Configure the environment variables
-4. Deploy
-
-For other deployment options, refer to the [Next.js deployment documentation](https://nextjs.org/docs/deployment).
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
+## 🤝 Contributing
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
+2. Create a feature branch (`git checkout -b feature/pet-amenities`)
+3. Commit your changes (`git commit -am 'Add pet amenity filtering'`)
+4. Push to the branch (`git push origin feature/pet-amenities`)
 5. Open a Pull Request
 
-## License
+## 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Acknowledgments
+## 🙏 Acknowledgments
 
-- [Next.js](https://nextjs.org/) - The React Framework
-- [Prisma](https://www.prisma.io/) - Next-generation ORM
-- [TailwindCSS](https://tailwindcss.com/) - Utility-first CSS framework
-- [NextAuth.js](https://next-auth.js.org/) - Authentication for Next.js
-- [Cloudinary](https://cloudinary.com/) - Image and video management
-- [MongoDB](https://www.mongodb.com/) - Document database
+- Original Airbnb clone foundation (MIT licensed)
+- NextAuth.js team for authentication framework
+- Prisma team for excellent ORM
+- Vercel for Next.js framework
+- Rural Romania pet-friendly accommodation community
+
+---
+
+**RuralHOP** - *Making rural Romania accessible for you and your pets* 🐾❤️
+
+*Successfully upgraded for August 2025 compatibility - ready for deployment!* ✅

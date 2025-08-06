@@ -25,7 +25,7 @@ export default function RegisterModal() {
     },
   });
 
-  const { mutate, isLoading } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: async (data) => axios.post("/api/register", data),
     onSuccess: () => {
       toast.success("Registered!");
@@ -39,7 +39,7 @@ export default function RegisterModal() {
 
   return (
     <Modal
-      disabled={isLoading}
+      disabled={isPending}
       isOpen={isRegisterOpen}
       onClose={closeRegister}
       // @ts-ignore
@@ -47,11 +47,11 @@ export default function RegisterModal() {
       actionLabel="Continue"
       title="Register"
       body={
-        <RegisterBody
-          register={register}
-          errors={errors}
-          isLoading={isLoading}
-        />
+                  <RegisterBody
+            register={register}
+            errors={errors}
+            isPending={isPending}
+          />
       }
       footer={<RegisterFooter />}
     />

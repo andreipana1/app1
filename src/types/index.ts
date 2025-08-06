@@ -6,11 +6,33 @@ import React, {
   ReactNode,
 } from "react";
 import { Range } from "react-date-range";
-import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
+import { FieldError, FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 import { IconType } from "react-icons";
 
 export interface Props {
-  children: ReactNode;
+  children?: React.ReactNode;
+  error?: FieldError;
+  register?: UseFormRegister<FieldValues>;
+  required?: boolean;
+  errors?: FieldErrors;
+  label?: string;
+  disabled?: boolean;
+  formatPrice?: boolean;
+  type?: string;
+  id?: string;
+  categories?: Array<{ label: string; icon: IconType; description: string }>;
+  category?: string;
+  setCategory?: (category: string) => void;
+  categoryError?: boolean;
+  onCounterChange?: (action: string, value: number) => void;
+  map?: React.ReactElement;
+  onLocationChange?: (value: CountrySelectValue) => void;
+  imageSrc?: string;
+  onUpload?: (value: string) => void;
+  price?: number;
+  onPriceChange?: (value: number) => void;
+  onClick?: () => void;
+  isPending?: boolean;
 }
 
 export interface SessionInterface extends Session {
@@ -171,7 +193,7 @@ export interface CountrySelectProps {
 }
 
 export interface LoginBodyContentProps {
-  isLoading: boolean;
+  isPending: boolean;
   register: UseFormRegister<FieldValues> | any;
   errors: FieldErrors<FieldValues>;
 }

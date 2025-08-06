@@ -23,25 +23,23 @@ export default function useFavorite({ listingId, currentUser }: IUseFavorite) {
     return list.includes(listingId);
   }, [currentUser?.user.favoriteIds, listingId]);
 
-  const { mutate } = useMutation(
-    () => {
+  const { mutate } = useMutation({
+    mutationFn: () => {
       if (hasFavorite) {
         return axios.delete(`/api/favorites/${listingId}`);
       } else {
         return axios.post(`/api/favorites/${listingId}`);
       }
     },
-    {
-      onSuccess: () => {
-        router.refresh();
-        toast.success("Success");
-      },
-      onError: (error) => {
-        console.error(error);
-        toast.error("Something went wrong.");
-      },
+    onSuccess: () => {
+      router.refresh();
+      toast.success("Success");
     },
-  );
+    onError: (error) => {
+      console.error(error);
+      toast.error("Something went wrong.");
+    },
+  });
 
   const toggleFavorite = useCallback(
     (event: MouseEvent<HTMLDivElement>) => {

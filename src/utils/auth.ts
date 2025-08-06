@@ -1,13 +1,13 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import bcrypt from "bcryptjs";
-import { getServerSession, NextAuthOptions } from "next-auth";
+import NextAuth, { NextAuthConfig } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 
 import { SessionInterface } from "@/types";
 import prisma from "@/utils/connect";
 
-export const authOptions: NextAuthOptions = {
+export const authConfig: NextAuthConfig = {
   adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
@@ -27,7 +27,7 @@ export const authOptions: NextAuthOptions = {
 
         const user = await prisma.user.findUnique({
           where: {
-            email: credentials.email,
+            email: credentials.email as string,
           },
         });
 
@@ -36,7 +36,7 @@ export const authOptions: NextAuthOptions = {
         }
 
         const passwordsMatch = await bcrypt.compare(
-          credentials.password,
+          credentials.password as string,
           user?.hashedPassword,
         );
 
@@ -54,7 +54,6 @@ export const authOptions: NextAuthOptions = {
             email: session?.user?.email as string,
           },
         });
-
 
         if (!currentUser) return session;
 
@@ -84,9 +83,11 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
 };
 
+export const { handlers, auth, signIn, signOut } = NextAuth(authConfig);
+
 export async function getCurrentUser() {
   try {
-    const session = await getServerSession(authOptions);
+    const session = await auth();
     if (!session?.user?.email) {
       return null;
     }

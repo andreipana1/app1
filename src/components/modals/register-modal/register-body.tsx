@@ -1,17 +1,24 @@
 "use client";
 
+import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
+
 import Heading from "@/components/heading";
 import Input from "@/components/inputs/input";
-import { LoginBodyContentProps as Props } from "@/types";
 
-export default function RegisterBody({ register, errors, isLoading }: Props) {
+interface RegisterBodyProps {
+  register: UseFormRegister<any>;
+  errors: FieldErrors<any>;
+  isPending?: boolean;
+}
+
+export default function RegisterBody({ register, errors, isPending }: RegisterBodyProps) {
   return (
     <div className="flex flex-col gap-4">
-      <Heading title="Welcome to Airbnb" subtitle="Create an account!" />
+      <Heading title="Welcome to RuralHOP" subtitle="Create an account!" />
       <Input
         id="email"
         label="Email"
-        disabled={isLoading}
+        disabled={isPending}
         register={register}
         errors={errors}
         required
@@ -19,7 +26,7 @@ export default function RegisterBody({ register, errors, isLoading }: Props) {
       <Input
         id="name"
         label="Name"
-        disabled={isLoading}
+        disabled={isPending}
         register={register}
         errors={errors}
         required
@@ -28,7 +35,7 @@ export default function RegisterBody({ register, errors, isLoading }: Props) {
         id="password"
         label="Password"
         type="password"
-        disabled={isLoading}
+        disabled={isPending}
         register={register}
         errors={errors}
         required

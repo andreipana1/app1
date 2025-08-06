@@ -9,16 +9,19 @@ const postSchema = z.object({
   startDate: z.date(),
   endDate: z.date(),
   totalPrice: z.number(),
+  // Pet-related fields for RuralHOP
+  hasPets: z.boolean().optional().default(false),
+  petCount: z.number().optional(),
 });
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
-  const { listingId, startDate, endDate, totalPrice } = postSchema.parse(body);
+  const { listingId, startDate, endDate, totalPrice, hasPets, petCount } = postSchema.parse(body);
 
   try {
     const currentUser = await getCurrentUser();
 
-    if (!currentUser)
+    if (!currentUser?.user?.id)
       return res.json({ message: "Unauthorized" }, { status: 401 });
 
     const listingAndReservation = await prisma.listing.update({
@@ -32,6 +35,9 @@ export async function POST(req: NextRequest) {
             startDate,
             endDate,
             totalPrice,
+            // Pet-related fields
+            hasPets: hasPets ?? false,
+            petCount,
           },
         },
       },
@@ -39,6 +45,7 @@ export async function POST(req: NextRequest) {
 
     return res.json(listingAndReservation, { status: 200 });
   } catch (error) {
+    console.error("Error creating reservation:", error);
     return res.json({ message: "Error Reservation!" }, { status: 500 });
   }
 }

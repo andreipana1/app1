@@ -16,17 +16,22 @@ const postSchema = z.object({
   location: z.object({
     value: z.string(),
   }),
+  // Pet-friendly fields for RuralHOP
+  petsAllowed: z.boolean().optional().default(false),
+  petFee: z.number().optional(),
+  maxPets: z.number().optional(),
+  petAmenities: z.array(z.string()).optional().default([]),
 });
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
 
-  const { location, price, ...rest } = postSchema.parse(body);
+  const { location, price, petsAllowed, petFee, maxPets, petAmenities, ...rest } = postSchema.parse(body);
 
   try {
     const currentUser = await getCurrentUser();
 
-    if (!currentUser)
+    if (!currentUser?.user?.id)
       return res.json({ message: "Unauthorized" }, { status: 401 });
 
     const listing = await prisma.listing.create({
@@ -35,11 +40,17 @@ export async function POST(req: NextRequest) {
         locationValue: location.value,
         price: parseInt(price, 10),
         userId: currentUser.user.id,
+        // Pet-friendly features
+        petsAllowed: petsAllowed ?? false,
+        petFee,
+        maxPets,
+        petAmenities: petAmenities ?? [],
       },
     });
 
     return res.json(listing, { status: 200 });
   } catch (error) {
+    console.error("Error creating listing:", error);
     return res.json({ message: "Error Creating new Rent!" }, { status: 500 });
   }
 }
