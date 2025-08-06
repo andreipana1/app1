@@ -82,7 +82,7 @@ export default function RentModal() {
   const onNext = () => setStep((prevState) => prevState + 1);
   const onBack = () => setStep((prevState) => prevState - 1);
 
-  const { mutate, isLoading: loading } = useMutation({
+  const { mutate, isPending: loading } = useMutation({
     mutationFn: async (newProduct: FieldValues) => {
       try {
         const imageUrl = await uploadImage(imageSrc);

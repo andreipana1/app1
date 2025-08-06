@@ -35,7 +35,7 @@ export default function ListingContainer({
   const [totalPrice, setTotalPrice] = useState(listing.price);
   const [dateRange, setDateRange] = useState<Range>(initialDateRange);
 
-  const { mutate, isLoading } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: () =>
       axios.post("/api/reservations", {
         totalPrice,
@@ -103,7 +103,7 @@ export default function ListingContainer({
                 onChangeDate={(value) => setDateRange(value)}
                 dateRange={dateRange}
                 onSubmit={handleCreateReservation}
-                disabled={isLoading}
+                disabled={isPending}
                 disabledDates={disableDates}
               />
             </aside>

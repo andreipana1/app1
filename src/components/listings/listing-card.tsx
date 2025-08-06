@@ -7,6 +7,7 @@ import { MouseEvent, useCallback, useMemo } from "react";
 
 import Button from "@/components/button";
 import HeartButton from "@/components/heart-button";
+import PetCoutureBadge from "@/components/PetCoutureBadge";
 import useCountries from "@/hooks/useCountries";
 import { ListingCardProps as Props } from "@/types";
 import { formatToMoney } from "@/utils/helpers";
@@ -50,31 +51,36 @@ export default function ListingCard({
     <Link href={`/listings/${data.id}`}>
       <article className="col-span-1 cursor-pointer group">
         <div className="flex flex-col gap-2 w-full">
-          <figure className="aspect-square w-full relative overflow-hidden rounded-xl">
+          <figure className="aspect-square w-full relative overflow-hidden rounded-xl border border-dior-cream bg-dior-cream/10 hover:shadow-[0_4px_12px_rgba(42,92,84,0.1)] transition-all">
             <Image
               src={data.imageSrc}
               alt="Listing"
               fill
               priority
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              className="object-cover h-full w-full group-hover:scale-110 transition"
+              className="object-cover h-full w-full grayscale hover:grayscale-0 group-hover:scale-110 transition-all duration-500"
             />
+            
+            {/* Pet Badge positioned at top-left */}
+            <PetCoutureBadge petPolicy={(data as any)?.petPolicy} />
+            
+            {/* Heart Button positioned at top-right */}
             <div className="absolute top-3 right-3">
               <HeartButton listingId={data.id} currentUser={currentUser} />
             </div>
           </figure>
 
-          <h1 className="font-semibold text-lg">
+          <h1 className="font-semibold text-lg text-dior-green">
             {location?.region}, {location?.label}
           </h1>
 
-          <p className="font-light text-neutral-500">
+          <p className="font-light text-dior-saddle">
             {reservationDate || data.category}
           </p>
 
           <footer className="flex flex-row items-center gap-1">
-            <h3 className="font-semibold">{price}</h3>
-            {!reservation && <p className="font-light">Night</p>}
+            <h3 className="font-semibold text-dior-green">{price}</h3>
+            {!reservation && <p className="font-light text-dior-saddle">Night</p>}
           </footer>
 
           {onAction && actionLabel && (
