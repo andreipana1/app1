@@ -5,9 +5,9 @@ import { getCurrentUser } from "@/utils/auth";
 import prisma from "@/utils/connect";
 
 interface IParams {
-  params: {
-    reservationId?: string;
-  };
+  params: Promise<{
+    reservationId: string;
+  }>;
 }
 
 const deleteSchema = z.object({
@@ -15,7 +15,8 @@ const deleteSchema = z.object({
 });
 
 export async function DELETE(req: Request, { params }: IParams) {
-  const { reservationId } = deleteSchema.parse(params);
+  const resolvedParams = await params;
+  const { reservationId } = deleteSchema.parse(resolvedParams);
 
   try {
     const currentUser = await getCurrentUser();

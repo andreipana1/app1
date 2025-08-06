@@ -5,9 +5,9 @@ import { getCurrentUser } from "@/utils/auth";
 import prisma from "@/utils/connect";
 
 interface IParams {
-  params: {
-    listingId?: string;
-  };
+  params: Promise<{
+    listingId: string;
+  }>;
 }
 
 const postSchema = z.object({
@@ -15,7 +15,8 @@ const postSchema = z.object({
 });
 
 export async function POST(req: Request, { params }: IParams) {
-  const { listingId } = postSchema.parse(params);
+  const resolvedParams = await params;
+  const { listingId } = postSchema.parse(resolvedParams);
 
   try {
     const currentUser = await getCurrentUser();
@@ -40,7 +41,8 @@ export async function POST(req: Request, { params }: IParams) {
 }
 
 export async function DELETE(req: Request, { params }: IParams) {
-  const { listingId } = postSchema.parse(params);
+  const resolvedParams = await params;
+  const { listingId } = postSchema.parse(resolvedParams);
 
   try {
     const currentUser = await getCurrentUser();

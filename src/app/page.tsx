@@ -9,11 +9,12 @@ export const dynamicParams = true;
 export const revalidate = 0;
 
 interface HomeProps {
-  searchParams: IListingsParams;
+  searchParams: Promise<IListingsParams>;
 }
 
 export default async function Home({ searchParams }: HomeProps) {
-  const listings = await getListings(searchParams);
+  const resolvedSearchParams = await searchParams;
+  const listings = await getListings(resolvedSearchParams);
   const currentUser = await getCurrentUser();
 
   if (listings.length === 0) return <EmptyState showReset />;
