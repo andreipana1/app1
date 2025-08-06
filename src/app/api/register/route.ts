@@ -15,7 +15,7 @@ export async function POST(req: Request) {
   const response = userSchema.safeParse(body);
 
   if (!response.success) {
-    const { errors } = response.error;
+    const errors = response.error.issues;
     return res.json({ message: "Invalid request", errors }, { status: 400 });
   }
 

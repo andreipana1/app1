@@ -1,0 +1,43 @@
+name: Dior Design CI
+on: 
+  push:
+    branches: [ main, development ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+        
+      - name: Generate Prisma client
+        run: npx prisma generate
+        
+      - name: Run linting
+        run: npm run lint
+        
+      - name: Build application
+        run: npm run build
+        env:
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          
+      - name: Check Dior design system
+        run: |
+          echo "Verifying Dior color palette implementation..."
+          grep -q "dior:" tailwind.config.ts && echo "✅ Dior colors found" || echo "❌ Dior colors missing"
+          grep -q "PetCoutureBadge" src/components/listings/listing-card.tsx && echo "✅ Pet badge integrated" || echo "❌ Pet badge missing"

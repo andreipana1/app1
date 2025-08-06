@@ -55,7 +55,6 @@ export const authOptions: NextAuthOptions = {
           },
         });
 
-
         if (!currentUser) return session;
 
         return {
@@ -73,6 +72,13 @@ export const authOptions: NextAuthOptions = {
         return session;
       }
     },
+    async jwt({ token, user }) {
+      // Preserve user info in JWT token for pet owner logic
+      if (user) {
+        token.isPetOwner = true; // Default pet logic - can be customized
+      }
+      return token;
+    },
   },
   session: {
     strategy: "jwt",
@@ -81,7 +87,7 @@ export const authOptions: NextAuthOptions = {
     signIn: "/",
   },
   debug: process.env.NODE_ENV !== "production",
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET || process.env.AUTH_SECRET, // Support both env variable names
 };
 
 export async function getCurrentUser() {
