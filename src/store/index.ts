@@ -13,7 +13,11 @@ interface RegisterSlice {
   closeRegister: () => void;
 }
 
-interface RentSlice {
+interface HotelSlice {
+  isHotelOpen: boolean;
+  openHotel: () => void;
+  closeHotel: () => void;
+  // Backward compatibility for components that still use rent terminology
   isRentOpen: boolean;
   openRent: () => void;
   closeRent: () => void;
@@ -37,10 +41,14 @@ const createRegisterSlice: StateCreator<RegisterSlice> = (set) => ({
   closeRegister: () => set({ isRegisterOpen: false }),
 });
 
-const createRentSlice: StateCreator<RentSlice> = (set) => ({
-  isRentOpen: false,
-  openRent: () => set({ isRentOpen: true }),
-  closeRent: () => set({ isRentOpen: false }),
+const createHotelSlice: StateCreator<HotelSlice> = (set, get) => ({
+  isHotelOpen: false,
+  openHotel: () => set({ isHotelOpen: true, isRentOpen: true }),
+  closeHotel: () => set({ isHotelOpen: false, isRentOpen: false }),
+  // Backward compatibility
+  get isRentOpen() { return get().isHotelOpen; },
+  openRent: () => set({ isHotelOpen: true, isRentOpen: true }),
+  closeRent: () => set({ isHotelOpen: false, isRentOpen: false }),
 });
 
 const createSearchSlice: StateCreator<SearchSlice> = (set) => ({
@@ -50,12 +58,12 @@ const createSearchSlice: StateCreator<SearchSlice> = (set) => ({
 });
 
 export const useModalStore = create<
-  LoginSlice & RegisterSlice & RentSlice & SearchSlice
+  LoginSlice & RegisterSlice & HotelSlice & SearchSlice
 >()(
   devtools((...a) => ({
     ...createLoginSlice(...a),
     ...createRegisterSlice(...a),
-    ...createRentSlice(...a),
+    ...createHotelSlice(...a),
     ...createSearchSlice(...a),
   })),
 );

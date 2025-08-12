@@ -19,28 +19,28 @@ export default function StepInfo({
   return (
     <div className="flex flex-col gap-8">
       <Heading
-        title="Share some basics about your place"
-        subtitle="What amenitis do you have?"
+        title="Share some basics about your hotel"
+        subtitle="What amenities and accommodations do you offer?"
       />
       <Counter
         onChange={(value) => setCustomValue("guestCount", value)}
         value={guestCount}
-        title="Guests"
-        subtitle="How many guests do you allow?"
+        title="Maximum Guests"
+        subtitle="How many guests can you accommodate per room?"
       />
       <hr />
       <Counter
         onChange={(value) => setCustomValue("roomCount", value)}
         value={roomCount}
-        title="Rooms"
-        subtitle="How many rooms do you have?"
+        title="Hotel Rooms"
+        subtitle="How many rooms does your hotel have?"
       />
       <hr />
       <Counter
         onChange={(value) => setCustomValue("bathroomCount", value)}
         value={bathroomCount}
         title="Bathrooms"
-        subtitle="How many bathrooms do you have?"
+        subtitle="How many bathrooms are available?"
       />
     </div>
   );
