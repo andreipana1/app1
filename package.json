@@ -1,5 +1,5 @@
 {
-  "name": "next-airbnb-clone",
+  "name": "ruralhop-hotel-app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -50,7 +50,6 @@
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^5.83.1",
     "@types/bcrypt": "^6.0.0",
-    "@types/bcryptjs": "^3.0.0",
     "@types/leaflet": "^1.9.20",
     "@types/react-date-range": "^1.4.10",
     "prettier": "3.6.2",

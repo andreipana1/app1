@@ -7,7 +7,7 @@ import { MouseEvent, useCallback, useMemo } from "react";
 
 import Button from "@/components/button";
 import HeartButton from "@/components/heart-button";
-import PetCoutureBadge from "@/components/PetCoutureBadge";
+import RuralHopBadge from "@/components/RuralHopBadge";
 import useCountries from "@/hooks/useCountries";
 import { ListingCardProps as Props } from "@/types";
 import { formatToMoney } from "@/utils/helpers";
@@ -61,8 +61,8 @@ export default function ListingCard({
               className="object-cover h-full w-full grayscale hover:grayscale-0 group-hover:scale-110 transition-all duration-500"
             />
             
-            {/* Pet Badge positioned at top-left */}
-            <PetCoutureBadge petPolicy={(data as any)?.petPolicy} />
+                          {/* Eco-Friendly Badge positioned at top-left */}
+            <RuralHopBadge amenity={(data as any)?.ecoFriendly} />
             
             {/* Heart Button positioned at top-right */}
             <div className="absolute top-3 right-3">

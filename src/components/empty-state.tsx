@@ -9,8 +9,8 @@ interface EmptyStateProps {
 }
 
 export default function EmptyState({
-  title = "No exact matches",
-  subtitle = "Try changing or removing some of your filters.",
+  title = "No hotels found",
+  subtitle = "Try adjusting your search criteria or removing some filters.",
   showReset,
 }: EmptyStateProps) {
   return (
@@ -20,7 +20,7 @@ export default function EmptyState({
       {showReset && (
         <Link
           href="/"
-          className="mt-2 rounded-lg hover:opacity-80 transition duration-300 bg-transparent border-2 border-black p-3 text-center"
+          className="mt-2 rounded-lg hover:opacity-80 transition duration-300 bg-ruralhop-forest text-white border-2 border-ruralhop-forest p-3 text-center"
         >
           Remove all filters
         </Link>

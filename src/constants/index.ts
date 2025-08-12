@@ -1,93 +1,99 @@
-import { BsSnow } from "react-icons/bs";
-import { FaSkiing } from "react-icons/fa";
+import { BsHouse } from "react-icons/bs";
+import { 
+  FaHotel, 
+  FaMountain, 
+  FaSpa, 
+  FaWineGlass} from "react-icons/fa";
 import {
   GiBarn,
   GiBoatFishing,
-  GiCactus,
+  GiCabbage,
   GiCastle,
-  GiCaveEntrance,
+  GiFlowerPot,
   GiForestCamp,
-  GiIsland,
-  GiWindmill,
-} from "react-icons/gi";
+  GiGrapes,
+  GiTreehouse} from "react-icons/gi";
 import { IoDiamond } from "react-icons/io5";
-import { MdOutlineVilla } from "react-icons/md";
-import { TbBeach, TbMountain, TbPool } from "react-icons/tb";
+import { 
+  MdNaturePeople, 
+  MdOutlineVilla, 
+  MdRestaurant,
+  MdSpa} from "react-icons/md";
+import { 
+  TbBeach, 
+  TbBuildingCottage, 
+  TbMountain, 
+  TbPool} from "react-icons/tb";
 
 export const categories = [
   {
-    label: "Beach",
-    icon: TbBeach,
-    description: "This property is close to the beach!",
+    label: "Boutique",
+    icon: FaHotel,
+    description: "Unique boutique hotels with character and charm!",
   },
   {
-    label: "Windmills",
-    icon: GiWindmill,
-    description: "This property is has windmills!",
-  },
-  {
-    label: "Modern",
-    icon: MdOutlineVilla,
-    description: "This property is modern!",
-  },
-  {
-    label: "Countryside",
-    icon: TbMountain,
-    description: "This property is in the countryside!",
-  },
-  {
-    label: "Pools",
-    icon: TbPool,
-    description: "This is property has a beautiful pool!",
-  },
-  {
-    label: "Islands",
-    icon: GiIsland,
-    description: "This property is on an island!",
-  },
-  {
-    label: "Lake",
-    icon: GiBoatFishing,
-    description: "This property is near a lake!",
-  },
-  {
-    label: "Skiing",
-    icon: FaSkiing,
-    description: "This property has skiing activies!",
-  },
-  {
-    label: "Castles",
-    icon: GiCastle,
-    description: "This property is an ancient castle!",
-  },
-  {
-    label: "Caves",
-    icon: GiCaveEntrance,
-    description: "This property is in a spooky cave!",
-  },
-  {
-    label: "Camping",
-    icon: GiForestCamp,
-    description: "This property offers camping activities!",
-  },
-  {
-    label: "Arctic",
-    icon: BsSnow,
-    description: "This property is in arctic environment!",
-  },
-  {
-    label: "Desert",
-    icon: GiCactus,
-    description: "This property is in the desert!",
-  },
-  {
-    label: "Barns",
+    label: "Farm Stay",
     icon: GiBarn,
-    description: "This property is in a barn!",
+    description: "Authentic farm stay experience in rural settings!",
   },
   {
-    label: "Lux",
+    label: "Mountain Lodge",
+    icon: TbMountain,
+    description: "Cozy mountain lodges with stunning views!",
+  },
+  {
+    label: "Lakeside",
+    icon: GiBoatFishing,
+    description: "Peaceful lakeside retreats perfect for relaxation!",
+  },
+  {
+    label: "Spa Resort",
+    icon: FaSpa,
+    description: "Wellness-focused hotels with spa facilities!",
+  },
+  {
+    label: "Historic Castle",
+    icon: GiCastle,
+    description: "Stay in beautifully restored historic castles!",
+  },
+  {
+    label: "Eco Lodge",
+    icon: GiForestCamp,
+    description: "Sustainable eco-friendly accommodations!",
+  },
+  {
+    label: "Wine Country",
+    icon: GiGrapes,
+    description: "Hotels in scenic wine regions and vineyards!",
+  },
+  {
+    label: "Luxury Resort",
     icon: IoDiamond,
-    description: "This property is brand new and luxurious!",
+    description: "Premium luxury resorts with top-tier amenities!",
+  },
+  {
+    label: "Beach Resort",
+    icon: TbBeach,
+    description: "Beautiful beachfront hotels and resorts!",
+  },
+  {
+    label: "Country Inn",
+    icon: TbBuildingCottage,
+    description: "Traditional country inns with local hospitality!",
+  },
+  {
+    label: "Treehouse",
+    icon: GiTreehouse,
+    description: "Unique elevated treehouse accommodations!",
+  },
+  {
+    label: "Garden Hotel",
+    icon: GiFlowerPot,
+    description: "Hotels surrounded by beautiful gardens!",
+  },
+  {
+    label: "Gourmet",
+    icon: MdRestaurant,
+    description: "Hotels featuring exceptional culinary experiences!",
   },
 ];

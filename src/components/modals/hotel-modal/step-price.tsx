@@ -13,12 +13,12 @@ export default function StepPrice({ loading, register, errors }: Props) {
   return (
     <div className="flex flex-col gap-8">
       <Heading
-        title="Now, set your price"
-        subtitle="How much do you charge per night?"
+        title="Set your room rate"
+        subtitle="What's your nightly rate per room?"
       />
       <Input
         id="price"
-        label="Price"
+        label="Nightly Rate (USD)"
         formatPrice
         type="number"
         disabled={loading}

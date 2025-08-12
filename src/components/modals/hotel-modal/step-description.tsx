@@ -14,12 +14,12 @@ export default function StepDescription({ loading, errors, register }: Props) {
   return (
     <div className="flex flex-col gap-8">
       <Heading
-        title="How would you describe your place?"
-        subtitle="Short and sweet works best!"
+        title="How would you describe your hotel?"
+        subtitle="Help guests understand what makes your hotel special!"
       />
       <Input
         id="title"
-        label="Title"
+        label="Hotel Name"
         disabled={loading}
         register={register}
         errors={errors}
@@ -28,7 +28,7 @@ export default function StepDescription({ loading, errors, register }: Props) {
       <hr />
       <Input
         id="description"
-        label="Description"
+        label="Hotel Description"
         disabled={loading}
         register={register}
         errors={errors}

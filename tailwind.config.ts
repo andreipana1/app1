@@ -9,18 +9,22 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        dior: {
-          green: '#2A5C54',
-          cream: '#E8D8C5',
-          saddle: '#B88B6A',
-          blush: '#E1C4B6'
+        ruralhop: {
+          forest: '#2D5016',      // Deep forest green
+          meadow: '#7FB069',      // Fresh meadow green
+          earth: '#8B4513',       // Rich earth brown
+          sand: '#F4E4BC',        // Warm sand beige
+          stone: '#8D7053',       // Natural stone
+          moss: '#9CAF88',        // Soft moss green
+          copper: '#B87333',      // Rustic copper
+          cream: '#FFF8DC'        // Natural cream
         }
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'dior-texture': "url('/noise.svg')"
+        'rural-texture': "url('/noise.svg')"
       },
     },
   },

@@ -10,7 +10,7 @@ import { useModalStore } from "@/store";
 
 export default function UserMenu() {
   const { data, status } = useSession();
-  const { openLogin, openRent, openRegister } = useModalStore();
+  const { openLogin, openHotel, openRegister } = useModalStore();
 
   const [isOpen, setIsOpen] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -19,10 +19,10 @@ export default function UserMenu() {
     setIsOpen((prevState) => !prevState);
   }, []);
 
-  const onRent = useCallback(() => {
+  const onListHotel = useCallback(() => {
     if (status === "unauthenticated") return openLogin();
-    return openRent();
-  }, [openLogin, openRent, status]);
+    return openHotel();
+  }, [openLogin, openHotel, status]);
 
   const closeModalRef = useCallback((event: any) => {
     if (modalRef.current?.contains(event.target as Node)) return;
@@ -40,10 +40,10 @@ export default function UserMenu() {
     <nav className="relative w-max ml-auto" ref={modalRef}>
       <div className="flex items-center gap-3">
         <button
-          onClick={onRent}
+          onClick={onListHotel}
           className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
         >
-          Airbnb your home
+          List your hotel
         </button>
         <button
           onClick={toggleOpen}
@@ -61,15 +61,15 @@ export default function UserMenu() {
           <div className="flex flex-col cursor-pointer">
             {status === "authenticated" ? (
               <>
-                <MenuItem label="My trips" url="/trips" />
+                <MenuItem label="My bookings" url="/trips" />
                 <MenuItem label="My favorites" url="/favorites" />
-                <MenuItem label="My reservations" url="/reservations" />
-                <MenuItem label="My properties" url="/properties" />
+                <MenuItem label="My hotel bookings" url="/reservations" />
+                <MenuItem label="My hotels" url="/properties" />
                 <button
-                  onClick={openRent}
+                  onClick={openHotel}
                   className="px-4 py-3 hover:bg-neutral-100 transition font-semibold text-left"
                 >
-                  Airbnb your home
+                  List your hotel
                 </button>
                 <button
                   onClick={() => signOut()}

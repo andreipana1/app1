@@ -7,13 +7,13 @@ import React, { useCallback, useMemo, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
+import BodyContent from "@/components/modals/hotel-modal/body-content";
+import StepDescription from "@/components/modals/hotel-modal/step-description";
+import StepImages from "@/components/modals/hotel-modal/step-images";
+import StepInfo from "@/components/modals/hotel-modal/step-info";
+import StepLocation from "@/components/modals/hotel-modal/step-location";
+import StepPrice from "@/components/modals/hotel-modal/step-price";
 import Modal from "@/components/modals/modal";
-import BodyContent from "@/components/modals/rent-modal/body-content";
-import StepDescription from "@/components/modals/rent-modal/step-description";
-import StepImages from "@/components/modals/rent-modal/step-images";
-import StepInfo from "@/components/modals/rent-modal/step-info";
-import StepLocation from "@/components/modals/rent-modal/step-location";
-import StepPrice from "@/components/modals/rent-modal/step-price";
 import { useModalStore } from "@/store";
 
 enum STEPS {
@@ -34,9 +34,9 @@ const uploadImage = async (imagePath: string) => {
   }
 };
 
-export default function RentModal() {
+export default function HotelModal() {
   const router = useRouter();
-  const { closeRent, isRentOpen } = useModalStore();
+  const { closeRent: closeHotel, isRentOpen: isHotelOpen } = useModalStore();
 
   const [step, setStep] = useState(STEPS.CATEGORY);
 
@@ -83,13 +83,13 @@ export default function RentModal() {
   const onBack = () => setStep((prevState) => prevState - 1);
 
   const { mutate, isPending: loading } = useMutation({
-    mutationFn: async (newProduct: FieldValues) => {
+    mutationFn: async (newHotel: FieldValues) => {
       try {
         const imageUrl = await uploadImage(imageSrc);
 
         if (imageUrl.url) {
-          const { data } = await axios.post("/api/listings", {
-            ...newProduct,
+          const { data } = await axios.post("/api/hotels", {
+            ...newHotel,
             imageSrc: imageUrl.url,
           });
 
@@ -100,14 +100,14 @@ export default function RentModal() {
       }
     },
     onSuccess: () => {
-      toast.success("Listing created!");
+      toast.success("Hotel listing created!");
       router.refresh();
       reset();
       setStep(STEPS.CATEGORY);
-      closeRent();
+      closeHotel();
     },
     onError: () => {
-      toast.error("Error creating Product");
+      toast.error("Error creating Hotel listing");
     },
   });
 
@@ -120,7 +120,7 @@ export default function RentModal() {
   );
 
   const actionLabel = useMemo(() => {
-    if (step === STEPS.PRICE) return "Create";
+    if (step === STEPS.PRICE) return "Create Hotel Listing";
     return "Next";
   }, [step]);
 
@@ -182,13 +182,13 @@ export default function RentModal() {
   return (
     <Modal
       disabled={loading}
-      isOpen={isRentOpen}
-      title="Airbnb your home!"
+      isOpen={isHotelOpen}
+      title="List your rural hotel on RuralHop!"
       actionLabel={actionLabel}
       onSubmit={handleSubmit(handleNewItem)}
       secondaryActionLabel={secondaryActionLabel}
       secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
-      onClose={closeRent}
+      onClose={closeHotel}
       body={ChangeSection}
     />
   );

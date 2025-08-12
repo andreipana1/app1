@@ -1,164 +1,155 @@
-# Next.js Fullstack Airbnb Clone
+# 🏡 RuralHop - Boutique Hotel Booking Platform
 
-A modern, full-featured Airbnb clone built with Next.js 13, React, Prisma, MongoDB, NextAuth, and Tailwind CSS. This application provides a complete property rental platform with features for both hosts and guests.
+RuralHop is a modern, full-stack hotel booking application designed for rural and boutique hotels. Built with Next.js 15, TypeScript, and Prisma, it provides a seamless experience for both hotel owners and guests.
 
-## Features
+## ✨ Features
 
-- 🔐 **Authentication**: Email/password and social login (Google) using NextAuth
-- 🏠 **Property Listings**: Create, browse, and search for properties
-- 🔍 **Advanced Filtering**: Filter properties by category, date range, location, and more
-- 📅 **Reservation System**: Book properties with date selection
-- 💰 **Pricing Calculation**: Automatic price calculation based on duration
-- 📍 **Map Integration**: Interactive maps for property locations using Leaflet
-- 📱 **Responsive Design**: Fully responsive UI for all devices
-- 🖼️ **Image Upload**: Cloudinary integration for property images
-- ❤️ **Favorites System**: Save and manage favorite properties
-- 👤 **User Profiles**: Manage your properties, trips, and reservations
-- 🔄 **Real-time Updates**: Instant UI updates using React Query
+### For Guests
+- 🔍 **Hotel Discovery**: Browse and search through a curated collection of rural and boutique hotels
+- 🏨 **Hotel Categories**: From farm stays and mountain lodges to luxury resorts and spa retreats
+- 📅 **Easy Booking**: Intuitive booking system with date selection
+- ❤️ **Favorites**: Save and manage your favorite hotels
+- 🗺️ **Interactive Maps**: Explore hotel locations with integrated mapping
+- 📱 **Responsive Design**: Perfect experience across all devices
 
-## Tech Stack
+### For Hotel Owners
+- 🏨 **Hotel Listings**: Create detailed hotel listings with photos and amenities
+- 📊 **Booking Management**: Track and manage hotel reservations
+- 💰 **Pricing Control**: Set competitive room rates
+- 📈 **Property Analytics**: Monitor your hotel's performance
 
-### Frontend
-- **Next.js 13** (App Router): React framework
-- **React 18**: UI library
-- **TailwindCSS**: Utility-first CSS framework
-- **React Hook Form**: Form validation
-- **React Query**: Data fetching and caching
-- **Zustand**: State management
-- **React Leaflet**: Maps integration
-- **React Date Range**: Date picker for reservations
+## 🛠️ Technology Stack
 
-### Backend
-- **Next.js API Routes**: Backend API
-- **Prisma**: ORM for database operations
-- **MongoDB**: Database
-- **NextAuth.js**: Authentication
-- **Cloudinary**: Image hosting and management
+- **Frontend**: Next.js 15, React 19, TypeScript
+- **Styling**: Tailwind CSS with custom RuralHop theme
+- **Backend**: Next.js API Routes
+- **Database**: Prisma ORM
+- **Authentication**: NextAuth.js
+- **Image Upload**: Cloudinary
+- **Maps**: Leaflet
+- **State Management**: Zustand
+- **Form Handling**: React Hook Form
+- **Data Fetching**: TanStack Query
 
-## Prerequisites
+## 🚀 Getting Started
 
-Before you begin, ensure you have the following installed:
-- Node.js (v16 or later)
+### Prerequisites
+- Node.js 18+ 
 - npm or yarn
-- MongoDB database (local or Atlas)
-- Cloudinary account
-- Google OAuth credentials (for social login)
+- Database (PostgreSQL recommended)
 
-## Environment Setup
+### Installation
 
-1. Clone the repository
-2. Copy the `.env.example` file to `.env` and fill in the required values:
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd ruralhop-hotel-app
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables**
+   Create a `.env.local` file with:
+   ```env
+   # Database
+   DATABASE_URL="your-database-url"
+   
+   # NextAuth
+   NEXTAUTH_SECRET="your-nextauth-secret"
+   NEXTAUTH_URL="http://localhost:3000"
+   
+   # Cloudinary (for image uploads)
+   NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME="your-cloud-name"
+   
+   # Add other required environment variables
+   ```
+
+4. **Set up the database**
+   ```bash
+   npx prisma generate
+   npx prisma db push
+   ```
+
+5. **Run the development server**
+   ```bash
+   npm run dev
+   ```
+
+Visit [http://localhost:3000](http://localhost:3000) to see your RuralHop application!
+
+## 🎨 Design System
+
+RuralHop features a carefully crafted design system inspired by rural landscapes:
+
+### Color Palette
+- **Forest Green** (`#2D5016`): Primary brand color
+- **Meadow Green** (`#7FB069`): Fresh accents
+- **Earth Brown** (`#8B4513`): Warm earth tones
+- **Sand Beige** (`#F4E4BC`): Natural backgrounds
+- **Stone Gray** (`#8D7053`): Neutral elements
+
+## 📱 Key Components
+
+- **Hotel Listings**: Browse hotels with filtering and search
+- **Booking Modal**: Multi-step booking process
+- **Interactive Maps**: Location-based hotel discovery
+- **User Authentication**: Secure login and registration
+- **Responsive Navigation**: Mobile-first design approach
+
+## 🏨 Hotel Categories
+
+- Boutique Hotels
+- Farm Stays
+- Mountain Lodges
+- Lakeside Retreats
+- Spa Resorts
+- Historic Castles
+- Eco Lodges
+- Wine Country Hotels
+- Luxury Resorts
+- Beach Resorts
+- Country Inns
+- Unique Accommodations (Treehouses, etc.)
+
+## 🔧 Development
+
+### Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+
+### Project Structure
 
 ```
-# Database
-DATABASE_URL=mongodb+srv://username:password@cluster.mongodb.net/airbnb
-DIRECT_URL=mongodb+srv://username:password@cluster.mongodb.net/airbnb
-
-# NextAuth
-NEXTAUTH_SECRET=your_nextauth_secret
-NEXTAUTH_URL=http://localhost:3000
-
-# Google OAuth
-GOOGLE_CLIENT_ID=your_google_client_id
-GOOGLE_CLIENT_SECRET=your_google_client_secret
-
-# Cloudinary
-CLOUDINARY_NAME=your_cloudinary_name
-CLOUDINARY_KEY=your_cloudinary_key
-CLOUDINARY_SECRET=your_cloudinary_secret
+src/
+├── app/                 # Next.js app directory
+├── components/          # Reusable UI components
+├── actions/            # Server actions
+├── hooks/              # Custom React hooks
+├── providers/          # Context providers
+├── store/              # Zustand stores
+├── types/              # TypeScript type definitions
+├── utils/              # Utility functions
+└── constants/          # App constants
 ```
 
-## Installation and Running
+## 🤝 Contributing
 
-1. Install dependencies:
-```bash
-npm install
-# or
-yarn install
-```
+We welcome contributions to RuralHop! Please read our contributing guidelines and submit pull requests for any improvements.
 
-2. Generate Prisma client:
-```bash
-npx prisma generate
-```
+## 📄 License
 
-3. Push the database schema to your MongoDB instance:
-```bash
-npx prisma db push
-```
+This project is licensed under the MIT License.
 
-4. Run the development server:
-```bash
-npm run dev
-# or
-yarn dev
-```
+## 🌟 About RuralHop
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+RuralHop was created to connect travelers with unique rural and boutique hotel experiences. We believe in supporting local communities and providing authentic hospitality experiences away from the crowded city centers.
 
-## Project Structure
+---
 
-```
-next-fullstack-airbnb/
-├── prisma/                # Prisma schema and migrations
-├── public/                # Static assets
-├── src/
-│   ├── actions/           # Server actions for data operations
-│   ├── app/               # Next.js App Router
-│   │   ├── api/           # API routes
-│   │   ├── favorites/     # Favorites page
-│   │   ├── listings/      # Listings pages
-│   │   ├── properties/    # User properties management
-│   │   ├── reservations/  # Reservations management
-│   │   └── trips/         # User trips
-│   ├── components/        # React components
-│   │   ├── inputs/        # Form inputs
-│   │   ├── listings/      # Listing components
-│   │   ├── modals/        # Modal dialogs
-│   │   └── navbar/        # Navigation components
-│   ├── constants/         # Application constants
-│   ├── hooks/             # Custom React hooks
-│   ├── providers/         # Context providers
-│   ├── store/             # State management (Zustand)
-│   ├── types/             # TypeScript types
-│   └── utils/             # Utility functions
-├── .env                   # Environment variables
-├── next.config.js         # Next.js configuration
-├── package.json           # Project dependencies
-├── tailwind.config.ts     # Tailwind CSS configuration
-└── tsconfig.json          # TypeScript configuration
-```
-
-## Deployment
-
-This application can be deployed on Vercel, the platform from the creators of Next.js:
-
-1. Push your code to a GitHub repository
-2. Import the project in Vercel
-3. Configure the environment variables
-4. Deploy
-
-For other deployment options, refer to the [Next.js deployment documentation](https://nextjs.org/docs/deployment).
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Acknowledgments
-
-- [Next.js](https://nextjs.org/) - The React Framework
-- [Prisma](https://www.prisma.io/) - Next-generation ORM
-- [TailwindCSS](https://tailwindcss.com/) - Utility-first CSS framework
-- [NextAuth.js](https://next-auth.js.org/) - Authentication for Next.js
-- [Cloudinary](https://cloudinary.com/) - Image and video management
-- [MongoDB](https://www.mongodb.com/) - Document database
+**Happy travels with RuralHop! 🏡✨**
